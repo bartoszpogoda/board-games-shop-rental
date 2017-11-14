@@ -12,7 +12,7 @@ CREATE TABLE Pracownicy (
 
 CREATE TABLE Kierownicy (
 	KierownikID INT(10) AUTO_INCREMENT PRIMARY KEY,
-    PracownikID INT(1) NOT NULL,
+    PracownikID INT(10) NOT NULL,
     
 	FOREIGN KEY (PracownikID) REFERENCES Pracownicy(PracownikID)
 );
