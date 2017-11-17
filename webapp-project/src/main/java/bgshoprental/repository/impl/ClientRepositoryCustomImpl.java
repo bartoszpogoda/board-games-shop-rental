@@ -9,7 +9,7 @@ import bgshoprental.entity.Client;
 import bgshoprental.repository.ClientRepositoryCustom;
 
 
-public class ClientRepositoryImpl implements ClientRepositoryCustom {
+public class ClientRepositoryCustomImpl implements ClientRepositoryCustom {
 
 	@PersistenceContext
     private EntityManager em;

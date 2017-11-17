@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import bgshoprental.service.ClientService;
 
 @Controller
-public class ClientsController {
-
-    @Autowired
-    private ClientService clientService;
-
-    @RequestMapping(value = "/clients", method = RequestMethod.GET)
-    public String list(Model model){
+@RequestMapping("/zarzadzanie")
+public class ManagmentController {
+	
+	@Autowired
+	ClientService clientService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String managementPage() {
+		return "management";
+	}
+	
+	@RequestMapping(value = "/klienci", method = RequestMethod.GET)
+    public String clientList(Model model){
         model.addAttribute("clients", clientService.listAllClients());
         return "clients";
     }
-
 }
