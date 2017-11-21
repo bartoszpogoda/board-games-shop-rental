@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import bgshoprental.listener.UserLoggedListener;
+
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -27,6 +29,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Bean
 	public Md5PasswordEncoder md5PasswordEncoder() {
 		return new Md5PasswordEncoder();
+	}
+	
+	@Bean 
+	public UserLoggedListener userLoggedListener() {
+		return new UserLoggedListener();
 	}
 
 	@Override

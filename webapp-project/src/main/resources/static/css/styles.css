@@ -1,3 +1,48 @@
 .logInButton {
 	margin: 7px;
 }
+
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+
+.parralax-bg-image {
+  position: relative;
+  /*opacity: 0.65;*/
+  background-attachment: fixed;
+  /*mb better without?*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.on-image-caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  font-size: 1.7em;
+  color: #f7f7f7;
+}
+
+.parralax-bg-image.image-1 {
+  background-image: url("../images/boardGames.jpeg");
+  min-height: 400px;
+}
