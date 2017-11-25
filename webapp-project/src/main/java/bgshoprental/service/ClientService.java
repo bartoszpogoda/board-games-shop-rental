@@ -1,8 +1,7 @@
 package bgshoprental.service;
 
-
 import bgshoprental.entity.Client;
 
 public interface ClientService {
-    Iterable<Client> listAllClients();
+    Iterable<Client> getAllClients();
 }

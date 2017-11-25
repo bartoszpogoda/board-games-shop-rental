@@ -3,33 +3,33 @@ package bgshoprental.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Klienci")
+@Table(name = "Klienci")
 public class Client {
-	
-    @Id
-    @Column(name = "KlientID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-    @Column(name = "Imie")
-    private String firstName;
-    
-    @Column(name = "Nazwisko")
-    private String lastName;
-    
-    @Column(name = "Telefon")
-    private String phoneNumber;
-    
-    @Column(name = "Email")
-    private String email;
-    
-    @Column(name = "Haslo")
-    private String passwordHash;
+	@Id
+	@Column(name = "KlientID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@Column(name = "Imie")
+	private String firstName;
+
+	@Column(name = "Nazwisko")
+	private String lastName;
+
+	@Column(name = "Telefon")
+	private String phoneNumber;
+
+	@Column(name = "Email")
+	private String email;
+
+	@Column(name = "Haslo")
+	private String passwordHash;
 
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -73,5 +73,5 @@ public class Client {
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-    
+
 }

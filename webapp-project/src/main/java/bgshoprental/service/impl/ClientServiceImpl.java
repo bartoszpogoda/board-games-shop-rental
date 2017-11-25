@@ -10,11 +10,11 @@ import bgshoprental.service.ClientService;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    @Autowired
-    private ClientRepository clientRepository;
-    
+	@Autowired
+	private ClientRepository clientRepository;
+
 	@Override
-	public Iterable<Client> listAllClients() {
+	public Iterable<Client> getAllClients() {
 		return clientRepository.findAll();
 	}
 }

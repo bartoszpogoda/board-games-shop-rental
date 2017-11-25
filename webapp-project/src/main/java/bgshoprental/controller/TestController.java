@@ -37,7 +37,7 @@ public class TestController {
 		
 		Iterable<BoardGame> findAll = boardGamesRepository.findAll();
 		
-		findAll.forEach(boardGame -> System.out.println(boardGame.getSupplier().getSupplierName()));
+		findAll.forEach(boardGame -> System.out.println(boardGame.getSupplier().getName()));
 		
 		Client findUserByEmail = clientRepository.findUserByEmail("mstokelle@homestead.com");
 		

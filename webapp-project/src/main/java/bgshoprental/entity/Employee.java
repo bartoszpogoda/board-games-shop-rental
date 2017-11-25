@@ -14,10 +14,10 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PracownikID")
 	private int id;
-	
+
 	@Column(name = "Email")
 	private String email;
-	
+
 	@Column(name = "Haslo")
 	private String password;
 
@@ -44,6 +44,5 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 }

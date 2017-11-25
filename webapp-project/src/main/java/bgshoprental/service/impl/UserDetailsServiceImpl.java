@@ -22,31 +22,31 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	ClientRepository clientRepository;
-	
+
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		
+
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		String password;
 		Client potentialClient = clientRepository.findUserByEmail(email);
-		
-		if(potentialClient != null) {
+
+		if (potentialClient != null) {
 			authorities.add(new SimpleGrantedAuthority("client"));
 			password = potentialClient.getPasswordHash();
-		} else  {
+		} else {
 			Employee potentialEmployee = employeeRepository.findByEmail(email);
-			
-			if(potentialEmployee != null) {
+
+			if (potentialEmployee != null) {
 				authorities.add(new SimpleGrantedAuthority("employee"));
 				password = potentialEmployee.getPassword();
 			} else {
 				throw new UsernameNotFoundException("User doesn't exist");
 			}
-		} 
-		
+		}
+
 		return new User(email, password, authorities);
 	}
 
