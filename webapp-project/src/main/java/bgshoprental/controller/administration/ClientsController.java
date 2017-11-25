@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import bgshoprental.service.ClientService;
 
 @Controller
-@RequestMapping("/zarzadzanie/klienci")
+@RequestMapping("/zarzadzanie")
 public class ClientsController {
 
 	@Autowired

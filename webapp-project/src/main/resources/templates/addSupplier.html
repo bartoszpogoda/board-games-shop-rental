@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Dodanie dostawcy</title>
+<th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+	<div class="container" style="margin-top: 50px;">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-plus"></span> Wprowadź dane
+						dostawcy
+					</div>
+					<div class="panel-body">
+						<div th:if="${param.exists}">
+							<p>Dostawca o podanej nazwie istnieje w systemie.</p>
+						</div>
+						<form class="form-horizontal" role="form" th:object="${supplier}"
+							th:action="@{/zarzadzanie/dostawcy/dodaj}" method="post">
+
+							<div class="form-group">
+								<label for="inputName" class="col-sm-3 control-label">
+									Nazwa</label>
+								<div class="col-sm-9">
+									<input th:field="*{name}" type="text" class="form-control"
+										id="inputName" placeholder="Nazwa dostawcy" name="name"
+										required="true"></input>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="inputPhoneNumber" class="col-sm-3 control-label">
+									Numer telefonu</label>
+								<div class="col-sm-9">
+									<input th:field="*{phoneNumber}" type="text"
+										class="form-control" id="inputPhoneNumber"
+										placeholder="Numer telefonu" name="phoneNumber"
+										required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputStreet" class="col-sm-3 control-label">
+									Ulica</label>
+								<div class="col-sm-9">
+									<input th:field="*{street}" type="text" class="form-control"
+										id="inputStreet" placeholder="Ulica" name="street"
+										required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputHomeNumber" class="col-sm-3 control-label">
+									Numer domu</label>
+								<div class="col-sm-9">
+									<input th:field="*{homeNumber}" type="text"
+										class="form-control" id="inputHomeNumber"
+										placeholder="Numer domu" name="homeNumber" required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputApartmentNumber" class="col-sm-3 control-label">
+									Numer mieszkania</label>
+								<div class="col-sm-9">
+									<input th:field="*{apartmentNumber}" type="text"
+										class="form-control" id="inputApartmentNumber"
+										placeholder="Numer mieszkania" name="apartmentNumber"
+										required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPostalCode" class="col-sm-3 control-label">
+									Kod pocztowy</label>
+								<div class="col-sm-9">
+									<input th:field="*{postalCode}" type="text"
+										class="form-control" id="inputPostalCode"
+										placeholder="Kod pocztowy" name="postalCode" required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputCity" class="col-sm-3 control-label">
+									Miasto</label>
+								<div class="col-sm-9">
+									<input th:field="*{city}" type="text" class="form-control"
+										id="inputCity" placeholder="Miasto" name="city"
+										required="true"></input>
+								</div>
+							</div>
+
+
+							<div class="form-group last">
+								<div class="col-sm-offset-3 col-sm-9">
+									<button type="submit" class="btn btn-success">Dodaj</button>
+									<button type="reset" class="btn btn-default">Zresetuj</button>
+									<a href="#" th:href="@{/zarzadzanie/dostawcy/}" class="btn btn-default">Anuluj</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

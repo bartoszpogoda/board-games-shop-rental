@@ -3,8 +3,10 @@ package bgshoprental.controller.administration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+import bgshoprental.entity.Supplier;
 import bgshoprental.service.SupplierService;
 
 @Controller
@@ -21,4 +23,16 @@ public class SuppliersController {
 		return "supplierList";
 	}
 
+	@RequestMapping("/dodaj")
+	public String addSupplierForm(Model model) {
+		model.addAttribute("supplier", new Supplier());
+		
+		return "addSupplier";
+	}
+	
+	@RequestMapping(value = "/dodaj", method = RequestMethod.POST)
+	public String addSupplier(@ModelAttribute Supplier supplier) {
+		return "supplierList";
+	}
+	
 }
