@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/zarzadzanie")
 public class ManagementController {
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/",method = RequestMethod.GET)
 	public String managementPage() {
 		return "management";
 	}

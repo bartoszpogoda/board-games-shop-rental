@@ -15,30 +15,32 @@
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a target="_blank" href="#" class="navbar-brand">Planszówki</a>
+					<a th:href="@{/}" href="#" class="navbar-brand">Strona główna</a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#">Inicio</a></li>
-						<li class="active"><a
-							href="http://bootsnipp.com/snippets/featured/nav-account-manager"
-							target="_blank">Inspirado en este ejemplo</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
+						<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/gry/') ? 'active':''}"><a th:href="@{/gry/dostepne/}" href="#">Gry
+								planszowe</a></li>
+						<!--  li  class="active" -->
+						<li sec:authorize="hasAuthority('employee')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/zarzadzanie/') ? 'active':''}"><a th:href="@{/zarzadzanie/}" href="#">Zarządzanie</a></li>
+						<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">DropDown <span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Link 2</a></li>
-							</ul></li>
+							</ul></li> -->
 					</ul>
-					
+
 					<a sec:authorize="isAnonymous()" th:href="@{/login}" href="/login"
-							class="logInButton btn btn-success pull-right">Zaloguj się</a>
-							
-					<ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
+						class="logInButton btn btn-success pull-right">Zaloguj się</a>
+
+					<ul sec:authorize="isAuthenticated()"
+						class="nav navbar-nav navbar-right">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <span
-								class="glyphicon glyphicon-user"></span>  <strong sec:authentication="principal.username">E-mail</strong>
-								<span class="glyphicon glyphicon-chevron-down"></span>
+								class="glyphicon glyphicon-user"></span>  <strong
+								sec:authentication="principal.username">E-mail</strong> <span
+								class="glyphicon glyphicon-chevron-down"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<li>
@@ -51,7 +53,8 @@
 											</div>
 											<div class="col-lg-8">
 												<p class="text-left">
-													<a href="#" class="btn btn-primary btn-block btn-sm">Moje zamówienia</a>
+													<a href="#" class="btn btn-primary btn-block btn-sm">Moje
+														zamówienia</a>
 												</p>
 											</div>
 										</div>
@@ -63,12 +66,11 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<p>
-													<form sec:authorize="isAuthenticated()" method="POST"
-														th:action="@{/logout}">
-														<button type="submit" name="submit" value="value"
-															class="btn btn-danger btn-block">Wyloguj
-														się</button>
-													</form>
+												<form sec:authorize="isAuthenticated()" method="POST"
+													th:action="@{/logout}">
+													<button type="submit" name="submit" value="value"
+														class="btn btn-danger btn-block">Wyloguj się</button>
+												</form>
 												</p>
 											</div>
 										</div>
@@ -76,13 +78,13 @@
 								</li>
 							</ul></li>
 					</ul>
-					
-					
+
+
 				</div>
 			</div>
 		</div>
 		<div id="placeholder" style="height: 50px;"></div>
-		
+
 	</div>
 </body>
 </html>

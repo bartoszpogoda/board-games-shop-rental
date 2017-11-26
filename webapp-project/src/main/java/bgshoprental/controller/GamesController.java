@@ -14,7 +14,7 @@ public class GamesController {
 	@Autowired
 	BoardGamesService boardGamesService;
 	
-	@RequestMapping("/dostepne")
+	@RequestMapping("/dostepne/")
 	String allGamesListPage(Model model) {
 		model.addAttribute("availableGames", boardGamesService.getAvailableBoardGames());
 		return "availableGames";
