@@ -25,4 +25,17 @@ VALUES ('965', '17-11-21', 'Do odbioru');
 INSERT INTO zamowieniawewnetrzne (KlientID, DataZlozenia, Status)
 VALUES ('14', '17-11-17', 'Do odbioru');
 
+-- Populate elements
+
+INSERT INTO ElementyZamowienWewnetrznych VALUES (1, 7, 2);
+INSERT INTO ElementyZamowienWewnetrznych VALUES (1, 5, 1);
+
+INSERT INTO ElementyZamowienWewnetrznych VALUES (3, 54, 1);
+
+INSERT INTO ElementyZamowienWewnetrznych VALUES (4, 33, 1);
+INSERT INTO ElementyZamowienWewnetrznych VALUES (4, 34, 1);
+
+-- View results
+
 SELECT * FROM zamowieniawewnetrzne;
+SELECT * FROM elementyzamowienwewnetrznych;

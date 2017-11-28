@@ -89,7 +89,7 @@ CREATE TABLE Wypozyczenia (
     INDEX (DataZwrotu)
 );
 
-CREATE TABLE ElemenyZamowienWewnetrznych (
+CREATE TABLE ElementyZamowienWewnetrznych (
 	ZamowienieWewnetrzneID INT(10) NOT NULL,
     GraPlanszowaID INT(10) NOT NULL,
     Ilosc INT(3),
