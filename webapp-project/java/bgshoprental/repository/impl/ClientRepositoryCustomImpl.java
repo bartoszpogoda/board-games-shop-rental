@@ -13,7 +13,7 @@ public class ClientRepositoryCustomImpl implements ClientRepositoryCustom {
 
 	@PersistenceContext
     private EntityManager em;
-	 
+	
 	@Override
 	public Client findUserByEmail(String email) {
 		List<Client> resultList = em.createQuery(

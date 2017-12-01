@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <title>Lista klientów</title>
+<title>Lista klientów</title>
 
-    <th:block th:include="fragments/headerinc :: head"></th:block>
+<th:block th:include="fragments/headerinc :: head"></th:block>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 
-	<th:block th:include="fragments/navbar :: navbar"></th:block>
-	
-    <div th:if="${not #lists.isEmpty(clients)}">
-        <h2>Lista klientów</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Id</th>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Telefon</th>
-                <th>E-mail</th>
-            </tr>
-            <tr th:each="client : ${clients}">
-                <td th:text="${client.id}">Id</td>
-                <td th:text="${client.firstName}">Imię</td>
-                <td th:text="${client.lastName}">Nazwisko</td>
-                <td th:text="${client.phoneNumber}">Telefon</td>
-                <td th:text="${client.email}">E-mail</td>
-            </tr>
-        </table>
+		<th:block th:include="fragments/navbar :: navbar"></th:block>
 
-    </div>
-</div>
+		<div th:if="${not #lists.isEmpty(clients)}">
+
+			<div class="row vertical-align">
+				<div class="col-md-4">
+					<h2>Lista klientów</h2>
+				</div>
+
+				<div class="col-md-offset-4 col-md-4">
+					<form role="form" th:action="@{/zarzadzanie/klienci}" method="post">
+						<div class="input-group stylish-input-group input-append">
+							<input name="lastNamePortion" type="text" class="form-control" placeholder="Search" />
+							<span class="input-group-addon">
+								<button type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Imię</th>
+					<th>Nazwisko</th>
+					<th>Telefon</th>
+					<th>E-mail</th>
+				</tr>
+				<tr th:each="client : ${clients}">
+					<td th:text="${client.id}">Id</td>
+					<td th:text="${client.firstName}">Imię</td>
+					<td th:text="${client.lastName}">Nazwisko</td>
+					<td th:text="${client.phoneNumber}">Telefon</td>
+					<td th:text="${client.email}">E-mail</td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
 
 </body>
 </html>

@@ -18,7 +18,7 @@
 						dostawcy
 					</div>
 					<div class="panel-body">
-						<div th:if="${param.exists}">
+						<div th:if="${errorExists}">
 							<p>Dostawca o podanej nazwie istnieje w systemie.</p>
 						</div>
 						<form class="form-horizontal" role="form" th:object="${supplier}"

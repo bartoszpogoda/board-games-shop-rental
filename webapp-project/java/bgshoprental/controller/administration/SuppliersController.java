@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import bgshoprental.entity.Supplier;
 import bgshoprental.service.SupplierService;
 
@@ -31,8 +32,15 @@ public class SuppliersController {
 	}
 	
 	@RequestMapping(value = "/dodaj", method = RequestMethod.POST)
-	public String addSupplier(@ModelAttribute Supplier supplier) {
-		return "supplierList";
+	public String addSupplier(Model model, @ModelAttribute Supplier supplier) {
+		if(supplierService.saveSupplierIfDoesntExist(supplier)) {
+			return "redirect:/zarzadzanie/dostawcy/";
+		} else{
+			model.addAttribute("supplier", supplier);
+			model.addAttribute("errorExists", true);
+			return "addSupplier";
+		}
+		
 	}
 	
 }

@@ -18,4 +18,15 @@ public class SupplierServiceImpl implements SupplierService {
 		return supplierRepository.findAll();
 	}
 
+	@Override
+	public boolean saveSupplierIfDoesntExist(Supplier supplier) {
+		boolean supplierExists = supplierRepository.exists(supplier.getName());
+		if(!supplierExists) {
+			supplierRepository.save(supplier);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
