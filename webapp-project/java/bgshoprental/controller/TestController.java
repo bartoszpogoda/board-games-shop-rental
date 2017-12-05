@@ -1,5 +1,7 @@
 package bgshoprental.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,8 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import bgshoprental.entity.BoardGame;
 import bgshoprental.entity.Client;
+import bgshoprental.entity.ExternalOrder;
+import bgshoprental.entity.ExternalOrderElement;
+import bgshoprental.entity.ExternalOrderStatus;
 import bgshoprental.repository.BoardGamesRepository;
 import bgshoprental.repository.ClientRepository;
+import bgshoprental.repository.ExternalOrderRepository;
 
 /***
  * 
@@ -32,17 +38,32 @@ public class TestController {
 	@Autowired
 	EntityManager entityManager;
 	
+	@Autowired
+	ExternalOrderRepository externalOrderRepository;
+	
 	@RequestMapping(value = "/")
 	public @ResponseBody String test(HttpServletRequest request) {
 		
-		Iterable<BoardGame> findAll = boardGamesRepository.findAll();
+
+		Iterable<ExternalOrder> xOrders = externalOrderRepository.findAll();
 		
-		findAll.forEach(boardGame -> System.out.println(boardGame.getSupplier().getName()));
+		xOrders.forEach((order) -> {
+			List<ExternalOrderElement> elements = order.getElements();
+			elements.forEach((element) -> {
+				System.out.println("Element " + element.getBoardGame().getTitle());
+			});
+		});
 		
-		Client findUserByEmail = clientRepository.findUserByEmail("mstokelle@homestead.com");
+		return "abc";
 		
-		System.out.println(request.getUserPrincipal());
+//		Iterable<BoardGame> findAll = boardGamesRepository.findAll();
+//		
+//		findAll.forEach(boardGame -> System.out.println(boardGame.getSupplier().getName()));
+//		
+//		Client findUserByEmail = clientRepository.findUserByEmail("mstokelle@homestead.com");
+//		
+//		System.out.println(request.getUserPrincipal());
 		
-		return findUserByEmail.getFirstName();
+//		return findUserByEmail.getFirstName();
 	}
 }
