@@ -12,3 +12,9 @@ insert into Pracownicy (Imie, Nazwisko, DataZatrudnienia, DataZwolnienia, Email,
 insert into Pracownicy (Imie, Nazwisko, DataZatrudnienia, DataZwolnienia, Email, Haslo) values ('Leonid', 'Hightown', '2016-10-16 03:08:46', null, 'lhightown8@goo.ne.jp', '5d14e6af976834e704d34764e91ae51e');
 insert into Pracownicy (Imie, Nazwisko, DataZatrudnienia, DataZwolnienia, Email, Haslo) values ('Zuzana', 'Burton', '2016-01-12 22:19:03', null, 'zburton9@chronoengine.com', 'eb385e0999e633de408042879a9183be');
 
+-- Populate Kierownicy
+
+-- Haslo - zbyszek123
+insert into Pracownicy (Imie, Nazwisko, DataZatrudnienia, DataZwolnienia, Email, Haslo) values ('Zbigniew', 'Szefowicz', '2013-01-01 22:19:03', null, 'zbychu@szef.pl', 'fb3a0b05c2a75ecceb70f81ee9852a9f');
+SELECT * FROM Pracownicy;
+insert into Kierownicy (PracownikID) values (11);
