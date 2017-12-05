@@ -3,6 +3,7 @@ package bgshoprental.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -44,7 +45,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
-			.antMatchers("/").permitAll().antMatchers("/zarzadzanie/**").hasAuthority("employee")
+			.antMatchers("/").permitAll()
+			.antMatchers(HttpMethod.GET, "/gry/dostepne/").permitAll()
+			.antMatchers("/zarzadzanie/**").hasAuthority("employee")
 			.anyRequest().fullyAuthenticated().and()
 			.formLogin().defaultSuccessUrl("/").loginPage("/login").failureUrl("/login?error").usernameParameter("email").permitAll().and()
 			.logout().logoutUrl("/logout").deleteCookies("remember-me").logoutSuccessUrl("/").permitAll(); //.and().rememberMe();

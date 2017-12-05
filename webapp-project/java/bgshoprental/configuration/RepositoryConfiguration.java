@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"bgshoprental.entity"})
-@EnableJpaRepositories(basePackages = {"bgshoprental.repository"})
+@EntityScan(basePackages = { "bgshoprental.entity" })
+@EnableJpaRepositories(basePackages = { "bgshoprental.repository" })
 @EnableTransactionManagement
 public class RepositoryConfiguration {
 }
