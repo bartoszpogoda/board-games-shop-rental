@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import bgshoprental.entity.BoardGame;
-import bgshoprental.entity.Client;
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;
 import bgshoprental.entity.ExternalOrderStatus;

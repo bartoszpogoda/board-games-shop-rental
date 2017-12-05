@@ -10,7 +10,6 @@ import org.springframework.security.authentication.event.AuthenticationSuccessEv
 
 import bgshoprental.entity.Employee;
 import bgshoprental.repository.EmployeeRepository;
-import bgshoprental.service.UserService;
 
 public class UserLoggedListener implements ApplicationListener<AuthenticationSuccessEvent> {
 
