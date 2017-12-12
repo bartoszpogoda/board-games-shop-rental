@@ -1,11 +1,11 @@
-package bgshoprental.service.impl;
+package bgshoprental.service.external.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bgshoprental.entity.Supplier;
 import bgshoprental.repository.SupplierRepository;
-import bgshoprental.service.SupplierService;
+import bgshoprental.service.external.SupplierService;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {

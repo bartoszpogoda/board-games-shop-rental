@@ -1,4 +1,4 @@
-package bgshoprental.service;
+package bgshoprental.service.external;
 
 import bgshoprental.entity.Supplier;
 

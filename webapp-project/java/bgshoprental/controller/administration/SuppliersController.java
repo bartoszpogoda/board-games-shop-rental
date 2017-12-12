@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import bgshoprental.entity.Supplier;
-import bgshoprental.service.SupplierService;
+import bgshoprental.service.external.SupplierService;
 
 @Controller
 @RequestMapping("/zarzadzanie/dostawcy")
