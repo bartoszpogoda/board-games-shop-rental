@@ -3,6 +3,7 @@ package bgshoprental.entity;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -41,7 +42,7 @@ public class ExternalOrder {
 	@Temporal(TemporalType.DATE)
 	private Calendar creationDate;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "externalOrder")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "externalOrder", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<ExternalOrderElement> elements;
 
 	public int getId() {

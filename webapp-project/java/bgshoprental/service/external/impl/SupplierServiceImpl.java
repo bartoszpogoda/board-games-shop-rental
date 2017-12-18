@@ -29,4 +29,9 @@ public class SupplierServiceImpl implements SupplierService {
 		}
 	}
 
+	@Override
+	public Supplier getSupplierByName(String supplierName) {
+		return supplierRepository.findOne(supplierName);
+	}
+
 }

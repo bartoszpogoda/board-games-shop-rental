@@ -20,4 +20,14 @@ public class BoardGamesServiceImpl implements BoardGamesService {
 		return boardGamesRepository.findAvailableBoardGames();
 	}
 
+	@Override
+	public Iterable<BoardGame> getAllBoardGames() {
+		return boardGamesRepository.findAll();
+	}
+
+	@Override
+	public BoardGame getBoardGameById(int id) {
+		return boardGamesRepository.findOne(id);
+	}
+
 }

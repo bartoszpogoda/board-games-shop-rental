@@ -1,5 +1,15 @@
 package bgshoprental.entity;
 
 public enum ExternalOrderStatus {
-	CREATED, REALIZED, CANCELED
+	CREATED("Utworzone"), REALIZED("Zrealizowane"), CANCELED("Anulowane");
+	
+	private String polishTranslation;
+
+	private ExternalOrderStatus(String polishTranslation) {
+		this.polishTranslation = polishTranslation;
+	}
+	
+	public String getPolishTranslation() {
+		return this.polishTranslation;
+	}
 }

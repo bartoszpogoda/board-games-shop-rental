@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import bgshoprental.entity.Employee;
 import bgshoprental.repository.EmployeeRepositoryCustom;
 
+
 public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
 
 	@PersistenceContext
