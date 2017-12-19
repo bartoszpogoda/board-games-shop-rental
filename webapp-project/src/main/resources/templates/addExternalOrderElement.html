@@ -18,7 +18,7 @@
 						zamówienia ...
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" role="form" th:action="@{/zarzadzanie/dostawcy/zamowienia/elementy/{externalOrderId}/dodaj(externalOrderId=${externalOrder.id})}"
+						<form class="form-horizontal" role="form" th:action="@{/zarzadzanie/zamowienia/zewnetrzne/{externalOrderId}/dodaj(externalOrderId=${externalOrder.id})}"
 							method="post">
 
 							<div class="form-group">
@@ -59,7 +59,7 @@
 								<div class="col-sm-offset-3 col-sm-9">
 									<button type="submit" class="btn btn-success">Dodaj</button>
 									<button type="reset" class="btn btn-default">Zresetuj</button>
-									<a href="#" th:href="@{/zarzadzanie/dostawcy/}"
+									<a href="#" th:href="@{/zarzadzanie/zamowienia/zewnetrzne/{externalOrderId}(externalOrderId=${externalOrder.id})}"
 										class="btn btn-default">Anuluj</a>
 								</div>
 							</div>

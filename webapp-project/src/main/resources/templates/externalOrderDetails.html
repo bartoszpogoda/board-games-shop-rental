@@ -61,15 +61,15 @@
 						<td th:text="${element.quantity}">Ilość</td>
 						<td th:text="${element.price}">Cena</td>
 
-						<td><button th:attr="data-id=${iter.index}"
+						<td><button th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" th:attr="data-id=${iter.index}"
 								class="btn btn-default btn-xs removeElement"
 								aria-label="Usuń wpis">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</button></td>
 					</tr>
-					<tr>
+					<tr th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}">
 						<td><a href="#" style="color: black;"
-							th:href="@{/zarzadzanie/dostawcy/zamowienia/elementy/{externalOrderId}/dodaj(externalOrderId=${externalOrder.id})}"><span
+							th:href="@{/zarzadzanie/zamowienia/zewnetrzne/{externalOrderId}/dodaj(externalOrderId=${externalOrder.id})}"><span
 								class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								Wprowadź element...</a></td>
 								<td></td>
@@ -92,9 +92,9 @@
 			function() {
 
 				$.ajax({
-					url : "/zarzadzanie/dostawcy/zamowienia/elementy/"
+					url : "/zarzadzanie/zamowienia/zewnetrzne/"
 							+ $('.orderDetails').data('external-order-id')
-							+ "/skasuj/" + $(this).data('id'),
+							+ "/" + $(this).data('id'),
 					type : 'DELETE',
 					headers : {
 						'X-CSRF-TOKEN' : token
