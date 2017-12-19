@@ -23,6 +23,32 @@
 					th:attr="data-external-order-id=${externalOrder.id}">
 					Szczegóły zamówienia nr. <span th:text="${externalOrder.id}">X</span>
 				</h2>
+
+				<table class="table table-striped">
+					<tr>
+						<td>Utworzone przez</td>
+						<td
+							th:text="${externalOrder.createdBy.firstName + ' ' + externalOrder.createdBy.lastName}">---</td>
+					</tr>
+					<tr>
+						<td>Data utworzenia</td>
+						<td
+							th:text="${#calendars.format(externalOrder.creationDate, 'dd MMM yyyy')}">Data
+							utworzenia</td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td th:text="${externalOrder.status.polishTranslation}">Status</td>
+					</tr>
+				</table>
+				<div class="btn-group" role="group" aria-label="...">
+				  <button th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" type="button" class="btn btn-default">Ustaw jako zrealizowane</button>
+				  <button th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" type="button" class="btn btn-default">Ustaw jako anulowane</button>
+				</div>
+
+				<hr />
+
+				<h3>Elementy</h3>
 				<table class="table table-striped">
 					<tr>
 						<th>Nazwa gry</th>
@@ -36,15 +62,19 @@
 						<td th:text="${element.price}">Cena</td>
 
 						<td><button th:attr="data-id=${iter.index}"
-							class="btn btn-default btn-xs removeElement" aria-label="Usuń wpis"> <span
-								class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</button></td>
+								class="btn btn-default btn-xs removeElement"
+								aria-label="Usuń wpis">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button></td>
 					</tr>
 					<tr>
 						<td><a href="#" style="color: black;"
 							th:href="@{/zarzadzanie/dostawcy/zamowienia/elementy/{externalOrderId}/dodaj(externalOrderId=${externalOrder.id})}"><span
 								class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								Wprowadź element...</a></td>
+								<td></td>
+								<td></td>
+								<td></td>
 					</tr>
 				</table>
 
@@ -57,21 +87,22 @@
 	var header = $("meta[name='_csrf_header']").attr("content");
 	var obj = {};
 	obj.header = header;
-	
-	$('.removeElement').click(function() {
-		
-		$.ajax({
-			url : "/zarzadzanie/dostawcy/zamowienia/elementy/"
-					+ $('.orderDetails').data('external-order-id') + "/skasuj/" + $(this).data('id'),
-			type : 'DELETE',
-			headers : {
-				'X-CSRF-TOKEN' : token
-			}
-		});
-		
-		$(this).parents('tr').remove();
-		
-	});
-	
+
+	$('.removeElement').click(
+			function() {
+
+				$.ajax({
+					url : "/zarzadzanie/dostawcy/zamowienia/elementy/"
+							+ $('.orderDetails').data('external-order-id')
+							+ "/skasuj/" + $(this).data('id'),
+					type : 'DELETE',
+					headers : {
+						'X-CSRF-TOKEN' : token
+					}
+				});
+
+				$(this).parents('tr').remove();
+
+			});
 </script>
 </html>

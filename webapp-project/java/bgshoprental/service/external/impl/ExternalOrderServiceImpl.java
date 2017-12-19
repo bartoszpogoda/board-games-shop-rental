@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;
 import bgshoprental.entity.ExternalOrderStatus;
-import bgshoprental.repository.ExternalOrderElementRepository;
 import bgshoprental.repository.ExternalOrderRepository;
 import bgshoprental.service.external.ExternalOrderService;
 
@@ -17,8 +16,6 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 
 	@Autowired
 	private ExternalOrderRepository externalOrderRepository;
-	@Autowired
-	private ExternalOrderElementRepository externalOrderElementRepository;
 	
 
 	@Override
