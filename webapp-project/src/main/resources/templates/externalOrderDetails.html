@@ -41,10 +41,23 @@
 						<td th:text="${externalOrder.status.polishTranslation}">Status</td>
 					</tr>
 				</table>
-				<div class="btn-group" role="group" aria-label="...">
-				  <button th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" type="button" class="btn btn-default">Ustaw jako zrealizowane</button>
-				  <button th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" type="button" class="btn btn-default">Ustaw jako anulowane</button>
-				</div>
+				<form style="display: inline-block"
+					th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" role="form"
+					th:action="@{/zarzadzanie/zamowienia/zewnetrzne/{externalOrderId}/zrealizuj(externalOrderId = ${externalOrder.id})}"
+					method="post">
+					<button type="submit" class="btn btn-default">Ustaw jako
+						zrealizowane</button>
+
+				</form>
+
+				<form style="display: inline-block"
+					th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" role="form"
+					th:action="@{/zarzadzanie/zamowienia/zewnetrzne/{externalOrderId}/anuluj(externalOrderId = ${externalOrder.id})}"
+					method="post">
+					<button type="submit" class="btn btn-default">Ustaw jako
+						anulowane</button>
+
+				</form>
 
 				<hr />
 
@@ -61,20 +74,23 @@
 						<td th:text="${element.quantity}">Ilość</td>
 						<td th:text="${element.price}">Cena</td>
 
-						<td><button th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}" th:attr="data-id=${iter.index}"
+						<td><button
+								th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}"
+								th:attr="data-id=${iter.index}"
 								class="btn btn-default btn-xs removeElement"
 								aria-label="Usuń wpis">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</button></td>
 					</tr>
-					<tr th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}">
+					<tr
+						th:if="${externalOrder.status == T(bgshoprental.entity.ExternalOrderStatus).CREATED}">
 						<td><a href="#" style="color: black;"
 							th:href="@{/zarzadzanie/zamowienia/zewnetrzne/{externalOrderId}/dodaj(externalOrderId=${externalOrder.id})}"><span
 								class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								Wprowadź element...</a></td>
-								<td></td>
-								<td></td>
-								<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 				</table>
 

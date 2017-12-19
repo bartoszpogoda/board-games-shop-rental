@@ -122,4 +122,20 @@ public class ExternalOrdersController {
 		return "Removed";
 	}
 	
+	@RequestMapping(value = "/{externalOrderId}/zrealizuj", method = RequestMethod.POST)
+	public String markAsRealised(@PathVariable("externalOrderId") int externalOrderId) {
+
+		externalOrderService.realise(externalOrderId);
+		
+		return "redirect:/zarzadzanie/zamowienia/zewnetrzne/" +externalOrderId;
+	}
+	
+	@RequestMapping(value = "/{externalOrderId}/anuluj", method = RequestMethod.POST)
+	public String markAsCanceled(@PathVariable("externalOrderId") int externalOrderId) {
+		
+		externalOrderService.cancel(externalOrderId);
+		
+		return "redirect:/zarzadzanie/zamowienia/zewnetrzne/" +externalOrderId;
+	}
+	
 }

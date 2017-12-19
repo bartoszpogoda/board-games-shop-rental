@@ -2,12 +2,16 @@ package bgshoprental.service.external.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bgshoprental.entity.BoardGame;
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;
 import bgshoprental.entity.ExternalOrderStatus;
+import bgshoprental.repository.BoardGamesRepository;
 import bgshoprental.repository.ExternalOrderRepository;
 import bgshoprental.service.external.ExternalOrderService;
 
@@ -16,7 +20,9 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 
 	@Autowired
 	private ExternalOrderRepository externalOrderRepository;
-	
+
+	@Autowired
+	private BoardGamesRepository boardGamesRepository;
 
 	@Override
 	public boolean add(ExternalOrder externalOrder) {
@@ -52,15 +58,44 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 
 	@Override
 	public void removeExternalOrderElement(int externalOrderId, int elementId) {
-		//ExternalOrderElement elementToRemove = this.getById(externalOrderId).getElements().get(elementId);
-		//externalOrderElementRepository.removeElement(elementToRemove);
-		
+		// ExternalOrderElement elementToRemove =
+		// this.getById(externalOrderId).getElements().get(elementId);
+		// externalOrderElementRepository.removeElement(elementToRemove);
+
 		externalOrderRepository.removeElement(this.getById(externalOrderId), elementId);
 	}
 
 	@Override
 	public void addElement(int externalOrderId, ExternalOrderElement element) {
 		externalOrderRepository.addElement(this.getById(externalOrderId), element);
+	}
+
+	@Override
+	@Transactional
+	public void realise(int externalOrderId) {
+		ExternalOrder externalOrder = externalOrderRepository.findOne(externalOrderId);
+
+		for (ExternalOrderElement element : externalOrder.getElements()) {
+			BoardGame boardGame = element.getBoardGame();
+
+			int currentQuantity = boardGame.getSellQuantity();
+			int quantityToAdd = element.getQuantity();
+
+			boardGame.setSellQuantity(currentQuantity + quantityToAdd);
+
+			boardGamesRepository.save(boardGame);
+		}
+
+		externalOrder.setStatus(ExternalOrderStatus.REALIZED);
+		externalOrderRepository.save(externalOrder);
+	}
+
+	@Override
+	public void cancel(int externalOrderId) {
+		ExternalOrder externalOrder = externalOrderRepository.findOne(externalOrderId);
+
+		externalOrder.setStatus(ExternalOrderStatus.CANCELED);
+		externalOrderRepository.save(externalOrder);
 	}
 
 }
