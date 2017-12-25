@@ -30,18 +30,6 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 	}
 
 	@Override
-	public boolean cancel(ExternalOrder externalOrder) {
-		externalOrder.setStatus(ExternalOrderStatus.CANCELED);
-		return externalOrderRepository.save(externalOrder) != null;
-	}
-
-	@Override
-	public boolean finalize(ExternalOrder externalOrder) {
-		externalOrder.setStatus(ExternalOrderStatus.REALIZED);
-		return externalOrderRepository.save(externalOrder) != null;
-	}
-
-	@Override
 	public Iterable<ExternalOrder> getAll() {
 		return externalOrderRepository.findAll();
 	}
@@ -57,15 +45,13 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 	}
 
 	@Override
+	@Transactional
 	public void removeExternalOrderElement(int externalOrderId, int elementId) {
-		// ExternalOrderElement elementToRemove =
-		// this.getById(externalOrderId).getElements().get(elementId);
-		// externalOrderElementRepository.removeElement(elementToRemove);
-
 		externalOrderRepository.removeElement(this.getById(externalOrderId), elementId);
 	}
 
 	@Override
+	@Transactional
 	public void addElement(int externalOrderId, ExternalOrderElement element) {
 		externalOrderRepository.addElement(this.getById(externalOrderId), element);
 	}

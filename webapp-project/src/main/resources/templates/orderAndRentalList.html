@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div th:if="${not #lists.isEmpty(rentals)}">
+
+				<h2>Twoje wypożyczenia</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Gra planszowa</th>
+						<th>Data wypozyczenia</th>
+						<th>Data zwrotu</th>
+						<th>Koszt wypożyczenia</th>
+						<th>Status wypożyczenia</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="rental : ${rentals}">
+						<td th:text="${rental.id}">ID</td>
+						<td th:text="${rental.boardGame.title}">Tytuł gry</td>
+						<td
+							th:text="${#calendars.format(rental.creationDate, 'dd MMM yyyy')}">Data utworzenia</td>
+						<td
+							th:text="${#calendars.format(rental.rentUntilDate, 'dd MMM yyyy')}">Data zwrotu</td>
+
+						<td th:text="${rental.price}">Koszt</td>
+						<td th:text="${rental.status.polishTranslation}">
+							Status
+						</td>
+						<td>btn</td>
+					</tr>
+				</table>
+
+			</div>
+			
+			<div th:if="${not #lists.isEmpty(orders)}">
+
+				<h2>Twoje zamówienia</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Data złożenia</th>
+						<th>Status zamówienia</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="order : ${orders}">
+						<td th:text="${order.id}">ID</td>
+						<td
+							th:text="${#calendars.format(order.creationDate, 'dd MMM yyyy')}">Data utworzenia</td>
+						<td th:text="${order.status.polishTranslation}">
+							Status
+						</td>
+						<td>btn, details etc</td>
+					</tr>
+				</table>
+
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

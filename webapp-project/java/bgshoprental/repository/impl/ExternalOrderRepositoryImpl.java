@@ -14,7 +14,6 @@ public class ExternalOrderRepositoryImpl implements ExternalOrderRepositoryCusto
 	EntityManager em;
 	
 	@Override
-	@Transactional
 	public void removeElement(ExternalOrder externalOrder, int elementId) {
 		externalOrder.getElements().remove(elementId);
 		
@@ -22,7 +21,6 @@ public class ExternalOrderRepositoryImpl implements ExternalOrderRepositoryCusto
 	}
 
 	@Override
-	@Transactional
 	public void addElement(ExternalOrder externalOrder, ExternalOrderElement externalOrderElement) {
 		externalOrder.getElements().add(externalOrderElement);
 		externalOrderElement.setExternalOrder(externalOrder);

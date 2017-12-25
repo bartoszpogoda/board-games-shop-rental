@@ -1,5 +1,7 @@
 package bgshoprental.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +27,12 @@ public class Client {
 
 	@Column(name = "Haslo")
 	private String passwordHash;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderedBy", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<InternalOrder> orders;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Rental> rentals;
 
 	public Integer getId() {
 		return id;
@@ -72,6 +80,22 @@ public class Client {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+
+	public List<InternalOrder> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<InternalOrder> orders) {
+		this.orders = orders;
+	}
+
+	public List<Rental> getRentals() {
+		return rentals;
+	}
+
+	public void setRentals(List<Rental> rentals) {
+		this.rentals = rentals;
 	}
 
 }
