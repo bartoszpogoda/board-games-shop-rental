@@ -16,17 +16,17 @@ public class BoardGamesServiceImpl implements BoardGamesService {
 	BoardGamesRepository boardGamesRepository;
 
 	@Override
-	public List<BoardGame> getAvailableBoardGames() {
-		return boardGamesRepository.findAvailableBoardGames();
+	public List<BoardGame> findAvailableBoardGames() {
+		return boardGamesRepository.findAvailable();
 	}
 
 	@Override
-	public Iterable<BoardGame> getAllBoardGames() {
+	public Iterable<BoardGame> findAllBoardGames() {
 		return boardGamesRepository.findAll();
 	}
 
 	@Override
-	public BoardGame getBoardGameById(int id) {
+	public BoardGame findBoardGameById(int id) {
 		return boardGamesRepository.findOne(id);
 	}
 

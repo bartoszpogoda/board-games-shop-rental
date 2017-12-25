@@ -15,6 +15,8 @@ public interface ExternalOrderService {
 	void addElement(int externalOrderId, ExternalOrderElement element);
 	
 	boolean add(ExternalOrder externalOrder);
-	void realise(int externalOrderId);
-	void cancel(int externalOrderId);
+	
+	void processRealisation(int externalOrderId);
+	
+	void processCancelation(int externalOrderId);
 }

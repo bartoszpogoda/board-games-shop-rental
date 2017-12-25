@@ -94,7 +94,7 @@ public class ExternalOrdersController {
 	@RequestMapping(value = "/{externalOrderId}/dodaj", method = RequestMethod.GET)
 	public String addExternalOrderElementForm(Model model, @PathVariable("externalOrderId") int externalOrderId) {
 		
-		model.addAttribute("boardGames", boardGamesService.getAllBoardGames());
+		model.addAttribute("boardGames", boardGamesService.findAllBoardGames());
 		model.addAttribute("externalOrder", externalOrderService.getById(externalOrderId));
 		
 		return "addExternalOrderElement";
@@ -104,7 +104,7 @@ public class ExternalOrdersController {
 	public String addExternalOrderElement(@PathVariable("externalOrderId") int externalOrderId, @RequestParam("boardGameId") int boardGameId, @RequestParam("quantity") int quantity, @RequestParam("price") BigDecimal price ) {
 		
 		ExternalOrderElement externalOrderElement = new ExternalOrderElement();
-		externalOrderElement.setBoardGame(boardGamesService.getBoardGameById(boardGameId));
+		externalOrderElement.setBoardGame(boardGamesService.findBoardGameById(boardGameId));
 		externalOrderElement.setQuantity(quantity);
 		externalOrderElement.setPrice(price);
 		
@@ -125,7 +125,7 @@ public class ExternalOrdersController {
 	@RequestMapping(value = "/{externalOrderId}/zrealizuj", method = RequestMethod.POST)
 	public String markAsRealised(@PathVariable("externalOrderId") int externalOrderId) {
 
-		externalOrderService.realise(externalOrderId);
+		externalOrderService.processRealisation(externalOrderId);
 		
 		return "redirect:/zarzadzanie/zamowienia/zewnetrzne/" +externalOrderId;
 	}
@@ -133,7 +133,7 @@ public class ExternalOrdersController {
 	@RequestMapping(value = "/{externalOrderId}/anuluj", method = RequestMethod.POST)
 	public String markAsCanceled(@PathVariable("externalOrderId") int externalOrderId) {
 		
-		externalOrderService.cancel(externalOrderId);
+		externalOrderService.processCancelation(externalOrderId);
 		
 		return "redirect:/zarzadzanie/zamowienia/zewnetrzne/" +externalOrderId;
 	}

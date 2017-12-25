@@ -16,7 +16,7 @@ public class GamesController {
 	
 	@RequestMapping("/dostepne/")
 	String allGamesListPage(Model model) {
-		model.addAttribute("availableGames", boardGamesService.getAvailableBoardGames());
+		model.addAttribute("availableGames", boardGamesService.findAvailableBoardGames());
 		return "availableGames";
 	}
 }

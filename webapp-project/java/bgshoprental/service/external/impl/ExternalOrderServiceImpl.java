@@ -58,7 +58,7 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 
 	@Override
 	@Transactional
-	public void realise(int externalOrderId) {
+	public void processRealisation(int externalOrderId) {
 		ExternalOrder externalOrder = externalOrderRepository.findOne(externalOrderId);
 
 		for (ExternalOrderElement element : externalOrder.getElements()) {
@@ -77,7 +77,7 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 	}
 
 	@Override
-	public void cancel(int externalOrderId) {
+	public void processCancelation(int externalOrderId) {
 		ExternalOrder externalOrder = externalOrderRepository.findOne(externalOrderId);
 
 		externalOrder.setStatus(ExternalOrderStatus.CANCELED);

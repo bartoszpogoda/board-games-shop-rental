@@ -2,7 +2,6 @@ package bgshoprental.repository.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;

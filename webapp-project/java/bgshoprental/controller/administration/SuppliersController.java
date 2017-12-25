@@ -31,7 +31,7 @@ public class SuppliersController {
 
 	@RequestMapping("/")
 	public String listSuppliers(Model model) {
-		model.addAttribute("supplierList", supplierService.getAllSuppliers());
+		model.addAttribute("supplierList", supplierService.findAllSuppliers());
 
 		return "supplierList";
 	}

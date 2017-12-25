@@ -5,9 +5,9 @@ import java.util.List;
 import bgshoprental.entity.BoardGame;
 
 public interface BoardGamesService {
-	Iterable<BoardGame> getAllBoardGames();
+	Iterable<BoardGame> findAllBoardGames();
 
-	BoardGame getBoardGameById(int id);
+	BoardGame findBoardGameById(int id);
 	
-	List<BoardGame> getAvailableBoardGames();
+	List<BoardGame> findAvailableBoardGames();
 }
