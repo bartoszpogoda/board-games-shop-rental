@@ -22,7 +22,7 @@ public class ClientsController {
 	@RequestMapping(value = "/klienci", method = RequestMethod.GET)
 	public String clientList(Model model) {
 		model.addAttribute("clients", clientService.getAllClients());
-		return "clients";
+		return "zarzadzanie/klienci/clientList";
 	}
 	
 	@RequestMapping(value = "/klienci", method = RequestMethod.POST)
@@ -31,6 +31,6 @@ public class ClientsController {
 		
 		model.addAttribute("clients", filteredListOfClients);
 		
-		return "clients";
+		return "zarzadzanie/klienci/clientList";
 	}
 }

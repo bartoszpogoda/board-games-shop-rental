@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		String password;
-		Client potentialClient = clientRepository.findUserByEmail(email);
+		Client potentialClient = clientRepository.findByEmail(email);
 
 		if (potentialClient != null) {
 			authorities.add(new SimpleGrantedAuthority("client"));

@@ -16,4 +16,6 @@ VALUES ('21', '5', '17-11-13', '17-11-21', 'Odebrane');
 SELECT * FROM wypozyczenia;
 
 
+INSERT INTO wypozyczenia (KlientID, GraPlanszowaID, DataWypozyczenia, DataZwrotu, Status)
+VALUES ('21', '5', '17-11-13', '17-11-21', 'Odebrane');
 

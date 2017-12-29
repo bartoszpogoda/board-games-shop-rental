@@ -2,17 +2,43 @@ package bgshoprental.service.external;
 
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;
+import bgshoprental.service.exception.ExternalOrderNotFoundException;
 
 public interface ExternalOrderService {
-	ExternalOrder getById(int externalOrderId);
+	/**
+	 * Finds external order for given ID
+	 * 
+	 * @param externalOrderId
+	 * @return found external object or null if ID doesn't stand for one
+	 */
+	ExternalOrder findExternalOrderById(int externalOrderId);
 	
-	Iterable<ExternalOrder> getAll();
+	/**
+	 * Finds all existing external orders
+	 * 
+	 * @return Iterable containing all existing orders found
+	 */
+	Iterable<ExternalOrder> findAllExternalOrders();
 	
-	Iterable<ExternalOrderElement> getElements(int externalOrderId); 
+	/**
+	 * Finds elements of external order
+	 * 
+	 * @param externalOrderId the ID of external order which elements will be returned
+	 * @return Iterable containing found elements
+	 */
+	Iterable<ExternalOrderElement> findElementsForExternalOrderId(int externalOrderId); 
 	
+	/**
+	 * Adds element to existing external order
+	 * 
+	 * @param externalOrderId
+	 * @param element
+	 * 
+	 * @throws ExternalOrderNotFoundException when external order wasn't found for given id
+	 */
+	void addElementToExternalOrder(int externalOrderId, ExternalOrderElement element) throws ExternalOrderNotFoundException;
+
 	void removeExternalOrderElement(int externalOrderId, int elementId);
-	
-	void addElement(int externalOrderId, ExternalOrderElement element);
 	
 	boolean add(ExternalOrder externalOrder);
 	

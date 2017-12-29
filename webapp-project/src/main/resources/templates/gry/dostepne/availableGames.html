@@ -28,7 +28,7 @@
 							</div>
 
 							<div class="col-md-6">
-								<a class="btn btn-default btn-block" th:classappend="${game.sellQuantity == 0} ? disabled" href="#" role="button">Kupno</a>
+								<a class="btn btn-default btn-block" th:classappend="${game.sellQuantity == 0} ? disabled" href="#" th:href="@{/zamowienia/dodaj(boardGameId=${game.id})}" role="button">Kupno</a>
 								Cena: <span th:text="${game.sellPrice}"></span>zł
 								Dostępność <span th:text="${game.sellQuantity}" class="badge">Ilość</span>
 							</div>

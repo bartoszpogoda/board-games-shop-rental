@@ -14,11 +14,15 @@
 						<ul class="nav navbar-nav">
 							<li><a href="#" th:href="@{/gryPlanszowe}">Katalog gier</a></li>
 
+							<li sec:authorize="hasAuthority('client')">
+							<a href="#" th:href="@{/zarzadzanie/utworz}">Tworzone zamówienie</a>
+							</li>
+
 							<li sec:authorize="hasAuthority('employee')"><a href="#"
 								th:href="@{/zarzadzanie}">Panel pracownika</a></li>
 						</ul>
 					</div>
-					
+
 					<div>
 						<a sec:authorize="isAnonymous()" th:href="@{/login}" href="/login"
 							class="logInButton btn btn-success pull-right">Zaloguj się</a>
@@ -26,7 +30,7 @@
 							th:action="@{/logout}">
 							<button type="submit" name="submit" value="value"
 								class="logInButton btn btn-success pull-right">Wyloguj
-							się</button>
+								się</button>
 						</form>
 
 					</div>

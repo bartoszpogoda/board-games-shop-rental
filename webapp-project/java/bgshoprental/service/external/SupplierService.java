@@ -4,6 +4,8 @@ import bgshoprental.entity.Supplier;
 
 public interface SupplierService {
 	Iterable<Supplier> findAllSuppliers();
-	Supplier getSupplierByName(String supplierName);
+
+	Supplier findSupplierByName(String supplierName);
+
 	boolean saveSupplierIfDoesntExist(Supplier supplier);
 }

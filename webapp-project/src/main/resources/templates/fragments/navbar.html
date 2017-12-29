@@ -23,6 +23,10 @@
 								planszowe</a></li>
 						<!--  li  class="active" -->
 						<li sec:authorize="hasAuthority('employee')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/zarzadzanie/') ? 'active':''}"><a th:href="@{/zarzadzanie/}" href="#">Zarządzanie</a></li>
+						
+						
+						<li sec:authorize="hasAuthority('client')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/zamowienia/utworz') ? 'active':''}"><a th:href="@{/zamowienia/utworz}" href="#">Tworzone zamówienie</a></li>
+						
 						<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">DropDown <span class="caret"></span>
 						</a>

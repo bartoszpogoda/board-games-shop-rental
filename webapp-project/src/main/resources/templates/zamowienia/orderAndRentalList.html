@@ -63,7 +63,11 @@
 						<td th:text="${order.status.polishTranslation}">
 							Status
 						</td>
-						<td>btn, details etc</td>
+						<td><a href="#"
+							th:href="@{/zamowienia/{zamowienie}(zamowienie=${order.id})}"
+							class="btn btn-default btn-xs" aria-label="Szczegóły zamówienia">
+								<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						</a></td>
 					</tr>
 				</table>
 

@@ -7,16 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import bgshoprental.entity.BoardGame;
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;
-import bgshoprental.entity.ExternalOrderStatus;
+import bgshoprental.entity.InternalOrderElement;
 import bgshoprental.repository.BoardGamesRepository;
 import bgshoprental.repository.ClientRepository;
 import bgshoprental.repository.ExternalOrderRepository;
+import bgshoprental.util.InternalOrderBuilder;
 
 /***
  * 
@@ -40,18 +41,28 @@ public class TestController {
 	@Autowired
 	ExternalOrderRepository externalOrderRepository;
 	
+	@Autowired
+	InternalOrderBuilder internalOrderBuilder;
+	
 	@RequestMapping(value = "/")
-	public @ResponseBody String test(HttpServletRequest request) {
+	public @ResponseBody String test(Model model) {
 		
 
-		Iterable<ExternalOrder> xOrders = externalOrderRepository.findAll();
+//		Iterable<ExternalOrder> xOrders = externalOrderRepository.findAll();
+//		
+//		xOrders.forEach((order) -> {
+//			List<ExternalOrderElement> elements = order.getElements();
+//			elements.forEach((element) -> {
+//				System.out.println("Element " + element.getBoardGame().getTitle());
+//			});
+//		});
 		
-		xOrders.forEach((order) -> {
-			List<ExternalOrderElement> elements = order.getElements();
-			elements.forEach((element) -> {
-				System.out.println("Element " + element.getBoardGame().getTitle());
-			});
-		});
+		InternalOrderElement internalOrderElement = new InternalOrderElement();
+		
+		internalOrderElement.setBoardGame(boardGamesRepository.findAll().iterator().next());
+		
+		internalOrderBuilder.addElement(internalOrderElement);
+		
 		
 		return "abc";
 		

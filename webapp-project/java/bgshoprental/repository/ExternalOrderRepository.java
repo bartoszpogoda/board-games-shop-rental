@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import bgshoprental.entity.ExternalOrder;
 
-public interface ExternalOrderRepository extends CrudRepository<ExternalOrder, Integer>, ExternalOrderRepositoryCustom{
+public interface ExternalOrderRepository extends CrudRepository<ExternalOrder, Integer>{
 
 }

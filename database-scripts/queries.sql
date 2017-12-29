@@ -5,6 +5,20 @@ SELECT * FROM ElemenyZamowienWewnetrznych;
 SELECT * FROM ElementyZamowienZewnetrznych;
 SELECT * FROM Wypozyczenia;
 
+
+/* temp */
+
+SELECT * FROM Klienci WHERE email LIKE "%FOS%"; /* fosgard ID 15 */
+
+SELECT * FROM zamowieniaWewnetrzne;
+
+INSERT INTO ZamowieniaWewnetrzne (KlientID, DataZlozenia, Status)
+VALUES ('15', '17-10-10', 'Utworzone');
+
+
+INSERT INTO wypozyczenia (KlientID, GraPlanszowaID, DataWypozyczenia, DataZwrotu, Status)
+VALUES ('15', '72', '17-11-11', '17-12-12', 'Anulowane');
+
 /*
 	1. Znalezienie hasła klienta o danym adresie e-mail w celu uwierzytelnienia przy logowaniu.
 */
@@ -71,3 +85,5 @@ WHERE ZamowienieZewnetrzneID = 3;
 
 DELETE FROM ZamowieniaZewnetrzne
 WHERE ZamowienieZewnetrzneID = 3;
+
+

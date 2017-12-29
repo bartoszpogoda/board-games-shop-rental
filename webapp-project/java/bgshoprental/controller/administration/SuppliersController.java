@@ -33,14 +33,14 @@ public class SuppliersController {
 	public String listSuppliers(Model model) {
 		model.addAttribute("supplierList", supplierService.findAllSuppliers());
 
-		return "supplierList";
+		return "zarzadzanie/dostawcy/supplierList";
 	}
 
 	@RequestMapping("/dodaj")
 	public String addSupplierForm(Model model) {
 		model.addAttribute("supplier", new Supplier());
 
-		return "addSupplier";
+		return "zarzadzanie/dostawcy/addSupplier";
 	}
 
 	@RequestMapping(value = "/dodaj", method = RequestMethod.POST)
@@ -50,7 +50,7 @@ public class SuppliersController {
 		} else {
 			model.addAttribute("supplier", supplier);
 			model.addAttribute("errorExists", true);
-			return "addSupplier";
+			return "zarzadzanie/dostawcy/addSupplier";
 		}
 
 	}

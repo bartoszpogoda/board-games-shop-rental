@@ -10,7 +10,7 @@ public class ManagementController {
 
 	@RequestMapping(value = "/",method = RequestMethod.GET)
 	public String managementPage() {
-		return "management";
+		return "zarzadzanie/management";
 	}
 
 }

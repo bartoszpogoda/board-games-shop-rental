@@ -44,9 +44,9 @@ public class ExternalOrdersController {
 	@RequestMapping(value = "/")
 	public String externalOrderList(Model model) {
 
-		model.addAttribute("externalOrderList", externalOrderService.getAll());
+		model.addAttribute("externalOrderList", externalOrderService.findAllExternalOrders());
 
-		return "externalOrderList";
+		return "zarzadzanie/zamowienia/zewnetrzne/externalOrderList";
 	}
 	
 	@RequestMapping(value = "/dodaj")
@@ -54,13 +54,13 @@ public class ExternalOrdersController {
 			@RequestParam("dostawca") String supplierName) {
 
 		ExternalOrder externalOrder = new ExternalOrder();
-		Supplier supplier = supplierService.getSupplierByName(supplierName);
+		Supplier supplier = supplierService.findSupplierByName(supplierName);
 		externalOrder.setSupplier(supplier);
 		model.addAttribute("externalOrder", externalOrder);
 
 		session.setAttribute("creatingExternalOrderForSupplier", supplier);
 
-		return "addExternalOrder";
+		return "zarzadzanie/zamowienia/zewnetrzne/addExternalOrder";
 	}
 	
 
@@ -85,9 +85,9 @@ public class ExternalOrdersController {
 
 	@RequestMapping(value = "/{externalOrderId}")
 	public String externalOrderDetails(Model model, @PathVariable("externalOrderId") Integer externalOrderId) {
-		model.addAttribute("externalOrder", externalOrderService.getById(externalOrderId));
-		model.addAttribute("elements", externalOrderService.getElements(externalOrderId));
-		return "externalOrderDetails";
+		model.addAttribute("externalOrder", externalOrderService.findExternalOrderById(externalOrderId));
+		model.addAttribute("elements", externalOrderService.findElementsForExternalOrderId(externalOrderId));
+		return "zarzadzanie/zamowienia/zewnetrzne/externalOrderDetails";
 	}
 	
 
@@ -95,9 +95,9 @@ public class ExternalOrdersController {
 	public String addExternalOrderElementForm(Model model, @PathVariable("externalOrderId") int externalOrderId) {
 		
 		model.addAttribute("boardGames", boardGamesService.findAllBoardGames());
-		model.addAttribute("externalOrder", externalOrderService.getById(externalOrderId));
+		model.addAttribute("externalOrder", externalOrderService.findExternalOrderById(externalOrderId));
 		
-		return "addExternalOrderElement";
+		return "zarzadzanie/zamowienia/zewnetrzne/addExternalOrderElement";
 	}
 	
 	@RequestMapping(value = "/{externalOrderId}/dodaj", method = RequestMethod.POST)
@@ -108,7 +108,7 @@ public class ExternalOrdersController {
 		externalOrderElement.setQuantity(quantity);
 		externalOrderElement.setPrice(price);
 		
-		externalOrderService.addElement(externalOrderId, externalOrderElement);
+		externalOrderService.addElementToExternalOrder(externalOrderId, externalOrderElement);
 
 		return "redirect:/zarzadzanie/zamowienia/zewnetrzne/" +externalOrderId;
 	}

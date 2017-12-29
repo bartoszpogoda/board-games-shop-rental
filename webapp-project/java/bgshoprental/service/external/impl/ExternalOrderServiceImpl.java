@@ -1,7 +1,5 @@
 package bgshoprental.service.external.impl;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +9,8 @@ import bgshoprental.entity.BoardGame;
 import bgshoprental.entity.ExternalOrder;
 import bgshoprental.entity.ExternalOrderElement;
 import bgshoprental.entity.ExternalOrderStatus;
-import bgshoprental.repository.BoardGamesRepository;
 import bgshoprental.repository.ExternalOrderRepository;
+import bgshoprental.service.exception.ExternalOrderNotFoundException;
 import bgshoprental.service.external.ExternalOrderService;
 
 @Service
@@ -21,39 +19,45 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 	@Autowired
 	private ExternalOrderRepository externalOrderRepository;
 
-	@Autowired
-	private BoardGamesRepository boardGamesRepository;
-
 	@Override
 	public boolean add(ExternalOrder externalOrder) {
 		return externalOrderRepository.save(externalOrder) != null;
 	}
 
 	@Override
-	public Iterable<ExternalOrder> getAll() {
+	public Iterable<ExternalOrder> findAllExternalOrders() {
 		return externalOrderRepository.findAll();
 	}
 
 	@Override
-	public Iterable<ExternalOrderElement> getElements(int externalOrderId) {
-		return getById(externalOrderId).getElements();
+	public Iterable<ExternalOrderElement> findElementsForExternalOrderId(int externalOrderId) {
+		return findExternalOrderById(externalOrderId).getElements();
 	}
 
 	@Override
-	public ExternalOrder getById(int externalOrderId) {
+	public ExternalOrder findExternalOrderById(int externalOrderId) {
 		return externalOrderRepository.findOne(externalOrderId);
 	}
 
 	@Override
 	@Transactional
 	public void removeExternalOrderElement(int externalOrderId, int elementId) {
-		externalOrderRepository.removeElement(this.getById(externalOrderId), elementId);
+		ExternalOrder externalOrder = externalOrderRepository.findOne(externalOrderId);
+
+		externalOrder.getElements().remove(elementId);
 	}
 
 	@Override
 	@Transactional
-	public void addElement(int externalOrderId, ExternalOrderElement element) {
-		externalOrderRepository.addElement(this.getById(externalOrderId), element);
+	public void addElementToExternalOrder(int externalOrderId, ExternalOrderElement element) {
+		ExternalOrder externalOrder = findExternalOrderById(externalOrderId);
+
+		if (externalOrder == null) {
+			throw new ExternalOrderNotFoundException();
+		} else {
+			element.setExternalOrder(externalOrder);
+			externalOrder.getElements().add(element);
+		}
 	}
 
 	@Override
@@ -68,12 +72,9 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 			int quantityToAdd = element.getQuantity();
 
 			boardGame.setSellQuantity(currentQuantity + quantityToAdd);
-
-			boardGamesRepository.save(boardGame);
 		}
 
 		externalOrder.setStatus(ExternalOrderStatus.REALIZED);
-		externalOrderRepository.save(externalOrder);
 	}
 
 	@Override
@@ -81,7 +82,6 @@ public class ExternalOrderServiceImpl implements ExternalOrderService {
 		ExternalOrder externalOrder = externalOrderRepository.findOne(externalOrderId);
 
 		externalOrder.setStatus(ExternalOrderStatus.CANCELED);
-		externalOrderRepository.save(externalOrder);
 	}
 
 }

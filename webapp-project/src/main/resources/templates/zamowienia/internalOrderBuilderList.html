@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div>
+			
+			<h3>Elementy tworzonego zamówienia</h3>
+				<table class="table table-striped">
+					<tr>
+						<th>Nazwa gry</th>
+						<th>Ilość</th>
+						<th>Cena (szt)</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="element: ${elements}">
+						<td th:text="${element.boardGame.title}">Gra planszowa</td>
+						<td th:text="${element.quantity}">Ilość</td>
+						<td th:text="${element.boardGame.sellPrice}">Cena</td>
+						<td></td>
+					</tr>
+				</table>
+			
+			</div>
+		</div>
+	</div>
+</body>
+</html>
