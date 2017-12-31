@@ -1,5 +1,6 @@
 package bgshoprental.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -45,6 +46,10 @@ public class ExternalOrder {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "externalOrder", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<ExternalOrderElement> elements;
 
+	public ExternalOrder() {
+		elements = new ArrayList<>();
+	}
+	
 	public int getId() {
 		return id;
 	}

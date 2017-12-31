@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Wprowadzenie zamówienia zewnętrznego</title>
+<title>Tworzenie wypożyczenia</title>
 <th:block th:include="fragments/headerinc :: head"></th:block>
 </head>
 <body>
@@ -14,11 +14,11 @@
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<span class="glyphicon glyphicon-plus"></span> Dodaj do zamówienia
+						<span class="glyphicon glyphicon-plus"></span> Utwórz wypożyczenie
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal" role="form"
-							th:action="@{/zamowienia/dodaj}" method="post">
+							th:action="@{/wypozyczenia/utworz}" method="post">
 
 							<table class="table table-striped">
 								<tr>
@@ -26,26 +26,25 @@
 									<td th:text="${boardGame.title}"></td>
 								</tr>
 								<tr>
-									<td>Cena za sztukę</td>
-									<td id="sellPrice" th:text="${boardGame.sellPrice}"
-										th:attr="data-sell-price=${boardGame.sellPrice}">Cena za
-										sztukę</td>
+									<td>Cena za wypożyczenie</td>
+									<td><span id="rentalPricePerDay" th:text="${boardGame.rentalPrice}"
+										th:attr="data-rental-price=${boardGame.rentalPrice}">0</span> zł/dzień</td>
 								</tr>
 								<tr>
-								<td>Ilość</td>
-								<td id="currentQuantityValue">1</td>
+								<td>Okres wypożyczenia (dni)</td>
+								<td><span id="currentNumberOfDaysValue">1</span></td>
 								</tr>
 								<tr>
 									<td>Koszt</td>
-									<td id="calculatedPrice" th:text="${boardGame.sellPrice}"></td>
+									<td><span id="calculatedPrice" th:text="${boardGame.rentalPrice}">0</span> zł</td>
 								</tr>
 							</table>
 
 							<input id="boardGameId" name="boardGameId" type="hidden"
 								value="-1" th:value="${boardGame.id}" />
 
-							<input id="quantity" name="quantity" type="range" min="1"
-								value="1" th:attr="max=${boardGame.sellQuantity}"
+							<input id="numberOfDays" name="numberOfDays" type="range" min="1"
+								value="1" max="28"
 								onchange="sliderChanged(this.value);" />
 
 							<div class="form-group last">
@@ -63,9 +62,9 @@
 
 	<script>
 		function sliderChanged(val) {
-			$('#currentQuantityValue').text(val);
-			var sellPrice = $('#sellPrice').data('sell-price');
-			$('#calculatedPrice').text(parseFloat(val * sellPrice).toFixed(2));
+			$('#currentNumberOfDaysValue').text(val);
+			var rentalPricePerDay = $('#rentalPricePerDay').data('rental-price');
+			$('#calculatedPrice').text(parseFloat(val * rentalPricePerDay).toFixed(2));
 		}
 	</script>
 

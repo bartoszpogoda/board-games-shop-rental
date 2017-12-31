@@ -40,6 +40,8 @@ public class OrderAndRentalController {
 
 		model.addAttribute("orders", internalOrderService.findAllInternalOrdersByClient(loggedInClient));
 		model.addAttribute("rentals", rentalService.findAllRentalsByClient(loggedInClient));
+		
+		model.addAttribute("internalOrderService", internalOrderService);
 
 		return "zamowienia/orderAndRentalList";
 	}

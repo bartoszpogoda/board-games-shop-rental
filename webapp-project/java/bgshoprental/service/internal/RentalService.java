@@ -6,4 +6,6 @@ import bgshoprental.entity.Rental;
 public interface RentalService {
 
 	Iterable<Rental> findAllRentalsByClient(Client client);
+
+	void createRental(Client client, Integer boardGameId, Integer numberOfDays);
 }

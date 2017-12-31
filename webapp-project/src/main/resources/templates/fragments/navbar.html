@@ -24,8 +24,10 @@
 						<!--  li  class="active" -->
 						<li sec:authorize="hasAuthority('employee')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/zarzadzanie/') ? 'active':''}"><a th:href="@{/zarzadzanie/}" href="#">Zarządzanie</a></li>
 						
+						<li sec:authorize="hasAuthority('client')" th:classappend="${#httpServletRequest.getRequestURI().equals('/zamowienia/') ? 'active':''}"><a th:href="@{/zamowienia/}" href="#">Moje zamówienia</a></li>
 						
-						<li sec:authorize="hasAuthority('client')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/zamowienia/utworz') ? 'active':''}"><a th:href="@{/zamowienia/utworz}" href="#">Tworzone zamówienie</a></li>
+						
+						<li th:if="${!(@internalOrderBuilder.isEmpty())}" sec:authorize="hasAuthority('client')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/zamowienia/utworz') ? 'active':''}"><a th:href="@{/zamowienia/utworz}" href="#">Tworzone zamówienie</a></li>
 						
 						<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">DropDown <span class="caret"></span>
@@ -47,24 +49,6 @@
 								class="glyphicon glyphicon-chevron-down"></span>
 						</a>
 							<ul class="dropdown-menu">
-								<li>
-									<div class="navbar-login">
-										<div class="row">
-											<div class="col-lg-4">
-												<p class="text-center">
-													<span class="glyphicon glyphicon-user icon-size"></span>
-												</p>
-											</div>
-											<div class="col-lg-8">
-												<p class="text-left">
-													<a th:href="@{/zamowienia/}" href="#" class="btn btn-primary btn-block btn-sm">Moje
-														zamówienia</a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="divider"></li>
 								<li>
 									<div class="navbar-login navbar-login-session">
 										<div class="row">

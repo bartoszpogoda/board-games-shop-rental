@@ -22,7 +22,7 @@
 						<h3 th:text="${game.title}">Title</h3>
 						<div class="row">
 							<div class="col-md-6">
-								<a class="btn btn-default btn-block" th:classappend="${game.rentalQuantity == 0} ? disabled" href="#" role="button">Wypożyczenie</a>
+								<a class="btn btn-default btn-block" th:classappend="${game.rentalQuantity == 0} ? disabled" href="#" th:href="@{/wypozyczenia/utworz(boardGameId=${game.id})}" role="button">Wypożyczenie</a>
 								Cena: <span th:text="${game.rentalPrice}"></span>zł / dzień
 								Dostępność: <span th:text="${game.rentalQuantity}" class="badge">Ilość</span>
 							</div>

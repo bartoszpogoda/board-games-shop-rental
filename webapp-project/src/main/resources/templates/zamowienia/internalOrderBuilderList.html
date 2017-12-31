@@ -10,6 +10,8 @@
 <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 
 
+
+
 </head>
 <body>
 
@@ -18,25 +20,48 @@
 		<div class="row" style="margin-top: 20px;">
 
 			<div>
-			
-			<h3>Elementy tworzonego zamówienia</h3>
-				<table class="table table-striped">
+
+				<h3>Elementy tworzonego zamówienia</h3>
+				<table id="summary" class="table table-striped">
 					<tr>
 						<th>Nazwa gry</th>
 						<th>Ilość</th>
-						<th>Cena (szt)</th>
+						<th>Cena (zł)</th>
+						<th>Koszt (zł)</th>
 						<th>Akcje</th>
 					</tr>
-					<tr th:each="element: ${elements}">
+					<tr th:each="element, iter: ${elements}">
 						<td th:text="${element.boardGame.title}">Gra planszowa</td>
-						<td th:text="${element.quantity}">Ilość</td>
-						<td th:text="${element.boardGame.sellPrice}">Cena</td>
-						<td></td>
+						<td class="quantity" th:text="${element.quantity}">Ilość</td>
+						<td class="price" th:text="${element.boardGame.sellPrice}">Cena</td>
+						<td th:text="${element.boardGame.sellPrice * element.quantity}">Koszt</td>
+						<td><button th:attr="data-id=${iter.index}"
+								class="btn btn-default btn-xs removeElement"
+								aria-label="Usuń wpis">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button></td>
 					</tr>
 				</table>
-			
+
+				<hr />
+
+				<h3>Podsumowanie</h3>
+
+				<table class="table table-striped">
+					<tr>
+						<td>Koszt</td>
+						<td><span id="totalPrice"></span> zł</td>
+					</tr>
+
+				</table>
+
+				<a class="btn btn-default" style="display: inline-block"
+					th:href="@{/zamowienia/utworz/potwierdz}" href="#">Zamów</a>
+
 			</div>
 		</div>
 	</div>
+	<script src="../../static/js/scripts/internalOrderBuilder.js"
+		th:src="@{/js/scripts/internalOrderBuilder.js}"></script>
 </body>
 </html>

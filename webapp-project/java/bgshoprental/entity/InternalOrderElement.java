@@ -2,6 +2,7 @@ package bgshoprental.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class InternalOrderElement implements Serializable {
 	private InternalOrder internalOrder;
 
 	@Id
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "GraPlanszowaID")
 	private BoardGame boardGame;
 

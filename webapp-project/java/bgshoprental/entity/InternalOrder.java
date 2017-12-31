@@ -1,5 +1,6 @@
 package bgshoprental.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,6 +26,7 @@ import bgshoprental.entity.converter.InternalOrderStatusConverter;
 public class InternalOrder {
 	@Id
 	@Column(name = "ZamowienieWewnetrzneID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@ManyToOne(optional = false)
@@ -40,6 +44,10 @@ public class InternalOrder {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "internalOrder", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<InternalOrderElement> elements;
 
+	public InternalOrder() {
+		elements = new ArrayList<>();
+	}
+	
 	public int getId() {
 		return id;
 	}
