@@ -40,7 +40,7 @@
 
 						<td><span th:text="${rental.price}">Koszt</span> zł</td>
 						<td th:text="${rental.status.polishTranslation}">Status</td>
-						<td><a href="#" th:href="@{/}" class="btn btn-default btn-xs"
+						<td><a th:if="${@rentalService.canBeExtended(rental)}" href="#" th:href="@{/}" class="btn btn-default btn-xs"
 							aria-label="Przedłuż wypożyczenie"> <span
 								class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 						</a><a href="#" th:href="@{/}" class="btn btn-default btn-xs"

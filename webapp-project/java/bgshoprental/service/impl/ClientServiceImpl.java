@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import bgshoprental.entity.Client;
@@ -16,6 +17,9 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	private ClientRepository clientRepository;
+	
+	@Autowired
+	private Md5PasswordEncoder md5PasswrdEncoder;
 	
 	@Autowired
 	private UserService userService;
@@ -35,5 +39,12 @@ public class ClientServiceImpl implements ClientService {
 		String loggedInUserEmail = principal.getName();
 
 		return userService.getClientByEmail(loggedInUserEmail);
+	}
+
+	@Override
+	public void register(Client client, String password) {
+		client.setPasswordHash(md5PasswrdEncoder.encodePassword(password, null));
+		
+		clientRepository.save(client);
 	}
 }

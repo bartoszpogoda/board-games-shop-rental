@@ -38,6 +38,10 @@
 						<td th:text="${supplier.city}">Miasto</td>
 						<td><a href="#" th:href="@{/zarzadzanie/zamowienia/zewnetrzne/dodaj(dostawca=${supplier.name})}" class="btn btn-default btn-xs"
 								aria-label="Dodaj zamówienie">
+								<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+							</a>
+							<a href="#" th:href="@{/zarzadzanie/gry/dodaj(supplierName=${supplier.name})}" class="btn btn-default btn-xs"
+								aria-label="Dodaj grę">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							</a></td>
 					</tr>

@@ -10,4 +10,5 @@ public interface ClientService {
     List<Client> findByLastNameContains(String lastNamePortion);
 	
 	Client getClientFromPrincipal(Principal principal);
+	void register(Client client, String password);
 }

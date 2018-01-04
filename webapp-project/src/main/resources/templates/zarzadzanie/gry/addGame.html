@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Dodanie dostawcy</title>
+<th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+	<div class="container" style="margin-top: 50px;">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-plus"></span> Wprowadź grę
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" role="form"
+							th:action="@{/zarzadzanie/gry/dodaj}" method="post">
+
+							<div class="form-group">
+								<label for="inputTitle" class="col-sm-3 control-label">
+									Tytuł</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control"
+										id="inputTitle" placeholder="Tytuł gry" name="title"
+										required="true"></input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="inputSupplierName" class="col-sm-3 control-label">
+									Dostawca</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control"
+										id="inputSupplierName" th:value="${supplierName}" name="supplierName"
+										required="true" readonly="readonly"></input>
+								</div>
+							</div>
+							
+							
+							<div class="form-group">
+								<label for="inputSellQuantity" class="col-sm-3 control-label">
+									Ilość sprzedaż</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputSellQuantity"
+										placeholder="0" name="sellQuantity" required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputSellPrice" class="col-sm-3 control-label">
+									Cena sprzedaż</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputSellPrice"
+										placeholder="1.00" name="sellPrice" required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputRentalQuantity" class="col-sm-3 control-label">
+									Ilość wypożyczenia</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control"
+										id="inputRentalQuantity" placeholder="0" name="rentalQuantity"
+										required="true"></input>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="inputRentalPrice" class="col-sm-3 control-label">
+									Cena wypożyczenie</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputRentalPrice"
+										placeholder="1.00" name="rentalPrice" required="true"></input>
+								</div>
+							</div>
+
+							<div class="form-group last">
+								<div class="col-sm-offset-3 col-sm-9">
+									<button type="submit" class="btn btn-success">Dodaj</button>
+									<button type="reset" class="btn btn-default">Zresetuj</button>
+									<a href="#" th:href="@{/zarzadzanie/gry/}"
+										class="btn btn-default">Anuluj</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

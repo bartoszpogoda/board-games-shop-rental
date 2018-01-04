@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import bgshoprental.service.internal.InternalOrderService;
+import bgshoprental.service.internal.RentalService;
 import bgshoprental.service.internal.impl.InternalOrderServiceImpl;
+import bgshoprental.service.internal.impl.RentalServiceImpl;
 import bgshoprental.util.InternalOrderBuilder;
 
 @Configuration
@@ -24,5 +26,10 @@ public class ThymeleafConfiguration {
 	@Bean
 	InternalOrderBuilder internalOrderBuilder() {
 		return new InternalOrderBuilder();
+	}
+	
+	@Bean
+	RentalService rentalService() {
+		return new RentalServiceImpl();
 	}
 }
