@@ -40,10 +40,10 @@
 
 						<td><span th:text="${rental.price}">Koszt</span> zł</td>
 						<td th:text="${rental.status.polishTranslation}">Status</td>
-						<td><a th:if="${@rentalService.canBeExtended(rental)}" href="#" th:href="@{/}" class="btn btn-default btn-xs"
+						<td><a th:if="${@rentalService.canBeExtended(rental) and rental.status == T(bgshoprental.entity.RentalStatus).RECEIVED and rental.price.doubleValue() != 0} " href="#" th:href="@{/wypozyczenia/{wypozyczenie}/przedluz(wypozyczenie=${rental.id})}" class="btn btn-default btn-xs"
 							aria-label="Przedłuż wypożyczenie"> <span
 								class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-						</a><a href="#" th:href="@{/}" class="btn btn-default btn-xs"
+						</a><a th:if="${rental.status == T(bgshoprental.entity.RentalStatus).RECEIVED and rental.boardGame.sellQuantity > 0 and rental.price.doubleValue() != 0}" href="#" th:href="@{/wypozyczenia/{wypozyczenie}/kup(wypozyczenie=${rental.id})}" class="btn btn-default btn-xs"
 							aria-label="Zakup gry"> <span
 								class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 						</a></td>

@@ -22,4 +22,12 @@ public interface RentalService {
 	void markAsReadyToReceive(Integer rentalId);
 
 	void markAsReceived(Integer rentalId);
+
+	boolean doesBelongToClient(Integer rentalId, Client client);
+
+	int getMaxExtensionDays(Integer rentalId);
+
+	void extendRental(Client client, Integer rentalId, int numberOfDaysToExtend);
+
+	void processBuyRentGame(Client client, Integer rentalId);
 }

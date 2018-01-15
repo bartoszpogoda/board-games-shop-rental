@@ -1,6 +1,8 @@
 package bgshoprental.service.internal.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -13,21 +15,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import bgshoprental.entity.BoardGame;
 import bgshoprental.entity.Client;
+import bgshoprental.entity.InternalOrderElement;
 import bgshoprental.entity.Rental;
 import bgshoprental.entity.RentalStatus;
 import bgshoprental.repository.BoardGamesRepository;
 import bgshoprental.repository.RentalRepository;
 import bgshoprental.service.exception.NotEnoughItemsAvailableException;
+import bgshoprental.service.internal.InternalOrderService;
 import bgshoprental.service.internal.RentalService;
 
 @Service
 public class RentalServiceImpl implements RentalService {
 
+	
 	@Autowired
 	RentalRepository rentalRepository;
 	
 	@Autowired
 	BoardGamesRepository boardGamesRepository;
+	
+	@Autowired
+	InternalOrderService internalOrderService;
 	
 	@Override
 	public Iterable<Rental> findAllRentalsByClient(Client client) {
@@ -113,5 +121,51 @@ public class RentalServiceImpl implements RentalService {
 	public void markAsReceived(Integer rentalId) {
 		Rental rental = findRentalById(rentalId);
 		rental.setStatus(RentalStatus.RECEIVED);
+	}
+
+	@Override
+	public boolean doesBelongToClient(Integer rentalId, Client client) {
+		Rental rental = rentalRepository.findOne(rentalId);
+		return rental.getClient().equals(client);
+	}
+	
+	@Override
+	public int getMaxExtensionDays(Integer rentalId) {
+		Rental rental = rentalRepository.findOne(rentalId);
+		
+		TimeZone tz = rental.getCreationDate().getTimeZone();
+		DateTimeZone jodaTz = DateTimeZone.forID(tz.getID());
+		DateTime creationDate = new DateTime(rental.getCreationDate().getTimeInMillis(), jodaTz);
+		
+		TimeZone tz2 = rental.getRentUntilDate().getTimeZone();
+		DateTimeZone jodaTz2 = DateTimeZone.forID(tz2.getID());
+		DateTime rentUntilDate = new DateTime(rental.getRentUntilDate().getTimeInMillis(), jodaTz2);
+		
+		return 28 - Days.daysBetween(creationDate, rentUntilDate).getDays();				
+	}
+
+	@Override
+	@Transactional
+	public void extendRental(Client client, Integer rentalId, int numberOfDaysToExtend) {
+		if(doesBelongToClient(rentalId, client) && getMaxExtensionDays(rentalId) >= numberOfDaysToExtend) {
+			Rental rental = rentalRepository.findOne(rentalId);
+			rental.getRentUntilDate().add(Calendar.DAY_OF_MONTH, numberOfDaysToExtend);
+			rental.setPrice(rental.getBoardGame().getRentalPrice().multiply(new BigDecimal(numberOfDaysToExtend)).add(rental.getPrice()));
+		}
+	}
+	
+	@Override
+	@Transactional
+	public void processBuyRentGame(Client client, Integer rentalId) {
+		
+		Rental rental = rentalRepository.findOne(rentalId);
+		
+		if(doesBelongToClient(rentalId, client) && rental.getBoardGame().getSellQuantity() > 0) {
+			
+			InternalOrderElement element = internalOrderService.createElement(rental.getBoardGame().getId(), 1);
+			internalOrderService.createAndSaveInternalOrder(new ArrayList<InternalOrderElement>(Arrays.asList(element)), client);
+			
+			rental.setPrice(BigDecimal.ZERO);
+		}
 	}
 }

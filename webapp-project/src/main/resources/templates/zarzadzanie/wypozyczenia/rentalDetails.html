@@ -45,6 +45,10 @@
 							th:text="${#calendars.format(rental.rentUntilDate, 'dd MMM yyyy')}"></td>
 					</tr>
 					<tr>
+						<td>Koszt</td>
+						<td><span th:text="${rental.price}"></span> zł</td>
+					</tr>
+					<tr>
 						<td>Status</td>
 						<td th:text="${rental.status.polishTranslation}"></td>
 					</tr>
