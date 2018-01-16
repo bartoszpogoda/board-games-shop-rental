@@ -50,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/gry/dostepne/").permitAll()
 			.antMatchers("/zamowienia/**").hasAuthority("client")
 			.antMatchers("/zarzadzanie/**").hasAuthority("employee")
+			.antMatchers("/administracja/**").hasAuthority("manager")
 			.anyRequest().fullyAuthenticated().and()
 			.formLogin().defaultSuccessUrl("/").loginPage("/login").failureUrl("/login?error").usernameParameter("email").permitAll().and()
 			.logout().logoutUrl("/logout").deleteCookies("remember-me").logoutSuccessUrl("/").permitAll(); //.and().rememberMe();

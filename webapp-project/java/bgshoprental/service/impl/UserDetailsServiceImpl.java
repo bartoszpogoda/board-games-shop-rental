@@ -42,6 +42,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			if (potentialEmployee != null) {
 				authorities.add(new SimpleGrantedAuthority("employee"));
 				password = potentialEmployee.getPassword();
+				
+				if(potentialEmployee.isManager()) {
+					authorities.add(new SimpleGrantedAuthority("manager"));
+				}
+				
 			} else {
 				throw new UsernameNotFoundException("User doesn't exist");
 			}

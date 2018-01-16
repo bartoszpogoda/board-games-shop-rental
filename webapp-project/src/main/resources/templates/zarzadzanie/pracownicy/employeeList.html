@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Lista klientów</title>
+
+<th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+	<div class="container">
+
+		<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+		<div>
+
+			<div class="row vertical-align">
+				<div class="col-md-4">
+					<h2>Lista pracowników</h2>
+				</div>
+			</div>
+
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Imię</th>
+					<th>Nazwisko</th>
+					<th>E-mail</th>
+					<th>Data zatrudnienia</th>
+					<th>Data zwolnienia</th>
+					<th>Manager</th>
+				</tr>
+				<tr th:each="employee : ${employees}">
+					<td th:text="${employee.id}">Id</td>
+					<td th:text="${employee.firstName}">Imię</td>
+					<td th:text="${employee.lastName}">Nazwisko</td>
+					<td th:text="${employee.email}">E-mail</td>
+					<td
+						th:text="${#calendars.format(employee.hireDate, 'dd MMM yyyy')}">Data
+						zatrudnienia</td>
+					<td
+						th:text="${employee.fireDate != null ? #calendars.format(employee.fireDate, 'dd MMM yyyy') : '-'}">Data
+						zwolnienia</td>
+					<td th:text="${employee.manager ? 'Tak' : 'Nie'}">Manager</td>
+				</tr>
+				<tr >
+					<td><a href="#" style="color: black;"
+						th:href="@{/administracja/pracownicy/dodaj}"><span
+							class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj
+							pracownika...</a></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+</body>
+</html>
