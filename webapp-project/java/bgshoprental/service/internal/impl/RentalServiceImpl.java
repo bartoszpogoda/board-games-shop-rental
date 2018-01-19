@@ -106,6 +106,9 @@ public class RentalServiceImpl implements RentalService {
 	@Transactional
 	public void realizeRental(Integer rentalId) {
 		Rental rental = findRentalById(rentalId);
+		BoardGame rentBoardGame = rental.getBoardGame();
+		
+		rentBoardGame.setRentalQuantity(rentBoardGame.getRentalQuantity() + 1);
 		rental.setStatus(RentalStatus.REALIZED);
 	}
 

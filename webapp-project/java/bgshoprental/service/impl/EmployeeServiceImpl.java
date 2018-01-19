@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import bgshoprental.entity.BoardGame;
 import bgshoprental.entity.Employee;
 import bgshoprental.repository.EmployeeRepository;
 import bgshoprental.service.EmployeeService;
@@ -34,5 +35,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setHireDate(Calendar.getInstance());
 		
 		employeeRepository.save(employee);
+	}
+
+	@Override
+	public Employee findEmployeeById(Integer employeeId) {
+		return employeeRepository.findOne(employeeId);
+	}
+	
+	@Override
+	public void removeEmployee(Integer employeeId) {
+		employeeRepository.delete(employeeId);
 	}
 }

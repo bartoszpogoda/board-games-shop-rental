@@ -17,4 +17,4 @@ insert into Pracownicy (Imie, Nazwisko, DataZatrudnienia, DataZwolnienia, Email,
 -- Haslo - zbyszek123
 insert into Pracownicy (Imie, Nazwisko, DataZatrudnienia, DataZwolnienia, Email, Haslo) values ('Zbigniew', 'Szefowicz', '2013-01-01 22:19:03', null, 'zbychu@szef.pl', 'fb3a0b05c2a75ecceb70f81ee9852a9f');
 SELECT * FROM Pracownicy;
-insert into Kierownicy (PracownikID) values (11);
+insert into Kierownicy (PracownikID) values (1);

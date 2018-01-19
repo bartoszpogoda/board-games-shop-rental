@@ -29,6 +29,7 @@
 					<th>Data zatrudnienia</th>
 					<th>Data zwolnienia</th>
 					<th>Manager</th>
+					<th>Akcje</th>
 				</tr>
 				<tr th:each="employee : ${employees}">
 					<td th:text="${employee.id}">Id</td>
@@ -42,6 +43,10 @@
 						th:text="${employee.fireDate != null ? #calendars.format(employee.fireDate, 'dd MMM yyyy') : '-'}">Data
 						zwolnienia</td>
 					<td th:text="${employee.manager ? 'Tak' : 'Nie'}">Manager</td>
+					<td><a th:if="${!employee.manager}" href="#" th:href="@{/administracja/pracownicy/{employeeId}/usun(employeeId=${employee.id})}"
+							class="btn btn-default btn-xs" aria-label="X"> <span
+								class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</a> </td>
 				</tr>
 				<tr >
 					<td><a href="#" style="color: black;"
