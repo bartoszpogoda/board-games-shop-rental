@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div>
+
+				<h2>Zamówienia zewnętrzne (od dostawców)</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Nazwa dostawcy</th>
+						<th>Utworzone przez</th>
+						<th>Data utworzenia</th>
+						<th>Status</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="externalOrder : ${externalOrderList}">
+						<td th:text="${externalOrder.id}">ID</td>
+						<td th:text="${externalOrder.supplier.name}">Dostawca</td>
+						<td
+							th:text="${externalOrder.createdBy.firstName + ' ' + externalOrder.createdBy.lastName}">Pracownik</td>
+						<td
+							th:text="${#calendars.format(externalOrder.creationDate, 'dd MMM yyyy')}">Data
+							utworzenia</td>
+							
+						<td th:text="${externalOrder.status.polishTranslation}">Status</td>
+						<td><a href="#"
+							th:href="@{/zarzadzanie/zamowienia/zewnetrzne/{zamowienie}(zamowienie=${externalOrder.id})}"
+							class="btn btn-default btn-xs" aria-label="Dodaj zamówienie">
+								<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						</a></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

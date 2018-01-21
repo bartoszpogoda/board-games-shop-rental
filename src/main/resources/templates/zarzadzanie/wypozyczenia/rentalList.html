@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div>
+
+				<h2>Wypożyczenia</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Klient</th>
+						<th>Gra planszowa</th>
+						<th>Data utworzenia</th>
+						<th>Termin oddania</th>
+						<th>Koszt</th>
+						<th>Status</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="rental : ${rentals}">
+						<td th:text="${rental.id}"></td>
+						<td
+							th:text="${rental.client.firstName + ' ' + rental.client.lastName}"></td>
+						<td th:text="${rental.boardGame.title}"></td>
+						<td th:text="${#calendars.format(rental.creationDate, 'dd MMM yyyy')}"></td>
+						<td th:text="${#calendars.format(rental.rentUntilDate, 'dd MMM yyyy')}"></td>
+						<td th:text="${rental.price}"></td>
+						<td th:text="${rental.status.polishTranslation}">Status</td>
+						<td><a href="#"
+							th:href="@{/zarzadzanie/wypozyczenia/{wypozyczenie}(wypozyczenie=${rental.id})}"
+							class="btn btn-default btn-xs" aria-label="Szczegóły wypożyczenia">
+								<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						</a></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

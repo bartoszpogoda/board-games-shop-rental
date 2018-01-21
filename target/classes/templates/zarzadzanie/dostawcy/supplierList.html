@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div>
+				<h2>Lista dostawców</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>Nazwa</th>
+						<th>Numer telefonu</th>
+						<th>Ulica</th>
+						<th>Numer domu</th>
+						<th>Numer mieszkania</th>
+						<th>Kod pocztowy</th>
+						<th>Miasto</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="supplier : ${supplierList}">
+						<td th:text="${supplier.name}">Nazwa</td>
+						<td th:text="${supplier.phoneNumber}">Numer telefonu</td>
+						<td th:text="${supplier.street}">Ulica</td>
+						<td th:text="${supplier.homeNumber}">Numer domu</td>
+						<td th:text="${supplier.apartmentNumber}">Numer mieszkania</td>
+						<td th:text="${supplier.postalCode}">Kod pocztowy</td>
+						<td th:text="${supplier.city}">Miasto</td>
+						<td><a href="#" th:href="@{/zarzadzanie/zamowienia/zewnetrzne/dodaj(dostawca=${supplier.name})}" class="btn btn-default btn-xs"
+								aria-label="Dodaj zamówienie">
+								<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+							</a>
+							<a href="#" th:href="@{/zarzadzanie/gry/dodaj(supplierName=${supplier.name})}" class="btn btn-default btn-xs"
+								aria-label="Dodaj grę">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							</a></td>
+					</tr>
+					<tr>
+						<td><a href="#" style="color: black;"
+							th:href="@{/zarzadzanie/dostawcy/dodaj}"><span
+								class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								Dodaj dostawcę...</a></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div>
+
+				<h2 class="orderDetails"
+					th:attr="data-internal-order-id=${internalOrder.id}">
+					Szczegóły zamówienia nr. <span th:text="${internalOrder.id}">X</span>
+				</h2>
+
+				<table class="table table-striped">
+					<tr>
+						<td>Zamówione przez</td>
+						<td
+							th:text="${internalOrder.orderedBy.firstName + ' ' + internalOrder.orderedBy.lastName}">---</td>
+					</tr>
+					<tr>
+						<td>Data złożenia</td>
+						<td
+							th:text="${#calendars.format(internalOrder.creationDate, 'dd MMM yyyy')}">Data
+							utworzenia</td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td th:text="${internalOrder.status.polishTranslation}">Status</td>
+					</tr>
+				</table>
+				
+				<form style="display: inline-block"
+					th:if="${internalOrder.status == T(bgshoprental.entity.InternalOrderStatus).CREATED}" role="form"
+					th:action="@{/zarzadzanie/zamowienia/wewnetrzne/{internalOrderId}/doodbioru(internalOrderId = ${internalOrder.id})}"
+					method="post">
+					<button type="submit" class="btn btn-default">Ustaw do odbioru</button>
+
+				</form>
+				
+				<form style="display: inline-block"
+					th:if="${(internalOrder.status != T(bgshoprental.entity.InternalOrderStatus).REALIZED) and (internalOrder.status != T(bgshoprental.entity.InternalOrderStatus).CANCELED)}" role="form"
+					th:action="@{/zarzadzanie/zamowienia/wewnetrzne/{internalOrderId}/anuluj(internalOrderId = ${internalOrder.id})}"
+					method="post">
+					<button type="submit" class="btn btn-default">Ustaw anulowane</button>
+
+				</form>
+				
+				<form style="display: inline-block"
+					th:if="${internalOrder.status == T(bgshoprental.entity.InternalOrderStatus).READY}" role="form"
+					th:action="@{/zarzadzanie/zamowienia/wewnetrzne/{internalOrderId}/zrealizowane(internalOrderId = ${internalOrder.id})}"
+					method="post">
+					<button type="submit" class="btn btn-default">Ustaw odebrane - zrealizowane</button>
+
+				</form>
+				
+
+				<hr />
+
+				<h3>Elementy</h3>
+				<table class="table table-striped">
+					<tr>
+						<th>Nazwa gry</th>
+						<th>Ilość</th>
+						<th>Cena (szt)</th>
+					</tr>
+					<tr th:each="element, iter : ${elements}">
+						<td th:text="${element.boardGame.title}">Gra planszowa</td>
+						<td th:text="${element.quantity}">Ilość</td>
+						<td th:text="${element.boardGame.sellPrice}">Cena</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

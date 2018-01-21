@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Wprowadzenie zamówienia zewnętrznego</title>
+<th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+	<div class="container" style="margin-top: 50px;">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-plus"></span> Dodaj do zamówienia
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" role="form"
+							th:action="@{/zamowienia/dodaj}" method="post">
+
+							<table class="table table-striped">
+								<tr>
+									<td>Nazwa gry</td>
+									<td th:text="${boardGame.title}"></td>
+								</tr>
+								<tr>
+									<td>Cena za sztukę</td>
+									<td id="sellPrice" th:text="${boardGame.sellPrice}"
+										th:attr="data-sell-price=${boardGame.sellPrice}">Cena za
+										sztukę</td>
+								</tr>
+								<tr>
+								<td>Ilość</td>
+								<td id="currentQuantityValue">1</td>
+								</tr>
+								<tr>
+									<td>Koszt</td>
+									<td id="calculatedPrice" th:text="${boardGame.sellPrice}"></td>
+								</tr>
+							</table>
+
+							<input id="boardGameId" name="boardGameId" type="hidden"
+								value="-1" th:value="${boardGame.id}" />
+
+							<input id="quantity" name="quantity" type="range" min="1"
+								value="1" th:attr="max=${boardGame.sellQuantity}"
+								onchange="sliderChanged(this.value);" />
+
+							<div class="form-group last">
+								<div class="col-sm-offset-3 col-sm-9">
+									<button type="submit" class="btn btn-success">Dodaj</button>
+									<a href="#" th:href="@{/gry/dostepne/}" class="btn btn-default">Anuluj</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sliderChanged(val) {
+			$('#currentQuantityValue').text(val);
+			var sellPrice = $('#sellPrice').data('sell-price');
+			$('#calculatedPrice').text(parseFloat(val * sellPrice).toFixed(2));
+		}
+	</script>
+
+</body>
+</html>

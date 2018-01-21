@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Zarządzanie</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/navbar :: navbar"></th:block> /*/-->
+
+	<div class="container" style="margin-top: 20px;">
+
+		<div class="row">
+
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/zarzadzanie/gry/}" href="#" role="button">Lista
+							gier</a>
+					</div>
+					<div class="panel-footer">Lista gier zarejestrowanych w
+						systemie</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/zarzadzanie/klienci}" href="#" role="button">Lista
+							klientów</a>
+					</div>
+					<div class="panel-footer">Lista klientów zarejestrowanych w
+						systemie</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/zarzadzanie/dostawcy/}" href="#" role="button">Lista
+							dostawców</a>
+					</div>
+					<div class="panel-footer">Lista dostawców zarejestrowanych w
+						systemie</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/zarzadzanie/zamowienia/zewnetrzne/}" href="#"
+							role="button">Zamówienia zewnętrzne</a>
+					</div>
+					<div class="panel-footer">Lista zamówień zewnętrznych</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/zarzadzanie/zamowienia/wewnetrzne/}" href="#"
+							role="button">Zamówienia wewnętrzne</a>
+					</div>
+					<div class="panel-footer">Lista zamówień wewnętrznych</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/zarzadzanie/wypozyczenia/}" href="#" role="button">Wypożyczenia</a>
+					</div>
+					<div class="panel-footer">Lista wypożyczeń</div>
+				</div>
+			</div>
+			
+			<div class="col-md-4" sec:authorize="hasAuthority('manager')">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="btn btn-block btn-default"
+							th:href="@{/administracja/pracownicy}" href="#" role="button">Pracownicy</a>
+					</div>
+					<div class="panel-footer">Lista pracowników</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

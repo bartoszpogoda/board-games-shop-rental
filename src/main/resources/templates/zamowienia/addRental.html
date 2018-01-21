@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Tworzenie wypożyczenia</title>
+<th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+	<div class="container" style="margin-top: 50px;">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-plus"></span> Utwórz wypożyczenie
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" role="form"
+							th:action="@{/wypozyczenia/utworz}" method="post">
+
+							<table class="table table-striped">
+								<tr>
+									<td>Nazwa gry</td>
+									<td th:text="${boardGame.title}"></td>
+								</tr>
+								<tr>
+									<td>Cena za wypożyczenie</td>
+									<td><span id="rentalPricePerDay" th:text="${boardGame.rentalPrice}"
+										th:attr="data-rental-price=${boardGame.rentalPrice}">0</span> zł/dzień</td>
+								</tr>
+								<tr>
+								<td>Okres wypożyczenia (dni)</td>
+								<td><span id="currentNumberOfDaysValue">1</span></td>
+								</tr>
+								<tr>
+									<td>Koszt</td>
+									<td><span id="calculatedPrice" th:text="${boardGame.rentalPrice}">0</span> zł</td>
+								</tr>
+							</table>
+
+							<input id="boardGameId" name="boardGameId" type="hidden"
+								value="-1" th:value="${boardGame.id}" />
+
+							<input id="numberOfDays" name="numberOfDays" type="range" min="1"
+								value="1" max="28"
+								onchange="sliderChanged(this.value);" />
+
+							<div class="form-group last">
+								<div class="col-sm-offset-3 col-sm-9">
+									<button type="submit" class="btn btn-success">Dodaj</button>
+									<a href="#" th:href="@{/gry/dostepne/}" class="btn btn-default">Anuluj</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sliderChanged(val) {
+			$('#currentNumberOfDaysValue').text(val);
+			var rentalPricePerDay = $('#rentalPricePerDay').data('rental-price');
+			$('#calculatedPrice').text(parseFloat(val * rentalPricePerDay).toFixed(2));
+		}
+	</script>
+
+</body>
+</html>

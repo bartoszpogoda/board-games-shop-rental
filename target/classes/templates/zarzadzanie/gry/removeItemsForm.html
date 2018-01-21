@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Tworzenie wypożyczenia</title>
+<th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+	<div class="container" style="margin-top: 50px;">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-plus"></span> Usuń egzemplarze
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" role="form"
+							th:action="@{/zarzadzanie/gry/usun}" method="post">
+
+							<table class="table table-striped">
+								<tr>
+									<td>Nazwa gry</td>
+									<td th:text="${boardGame.title}"></td>
+								</tr>
+								<tr>
+									<td>Ilość na sprzedaż</td>
+									<td><span id="sellQuantity"
+										th:text="${boardGame.sellQuantity}"></span></td>
+								</tr>
+								<tr>
+									<td>Ilość do usunięcia</td>
+									<td><span id="removeQuantitySell">0</span></td>
+								</tr>
+								<tr>
+									<td>Ilość na wypożyczenia</td>
+									<td><span id="rentalQuantity"
+										th:text="${boardGame.rentalQuantity}"></span></td>
+								</tr>
+								<tr>
+									<td>Ilość do usunięcia</td>
+									<td><span id="removeQuantityRental">0</span></td>
+								</tr>
+							</table>
+
+							<input id="boardGameId" name="boardGameId" type="hidden"
+								value="-1" th:value="${boardGame.id}" /> <input
+								id="quantityToRemoveSell" name="quantityToRemoveSell"
+								type="range" min="0" value="0"
+								th:attr="max=${boardGame.sellQuantity}"
+								onchange="sellSliderChanged(this.value);" /> <input
+								id="quantityToRemoveRental" name="quantityToRemoveRental"
+								type="range" min="0" value="0"
+								th:attr="max=${boardGame.rentalQuantity}"
+								onchange="rentalSliderChanged(this.value);" />
+
+							<div class="form-group last">
+								<div class="col-sm-offset-3 col-sm-9">
+									<button type="submit" class="btn btn-success">Dodaj</button>
+									<a href="#" th:href="@{/zarzadzanie/gry/}"
+										class="btn btn-default">Anuluj</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sellSliderChanged(val) {
+			$('#removeQuantitySell').text(val);
+		}
+
+		function rentalSliderChanged(val) {
+			$('#removeQuantityRental').text(val);
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Wypożyczalnio-Sklep Gier Planszowych</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+	<th:block th:include="fragments/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="row" style="margin-top: 20px;">
+
+			<div th:if="${not #lists.isEmpty(rentals)}">
+
+				<h2>Twoje wypożyczenia</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Gra planszowa</th>
+						<th>Data wypozyczenia</th>
+						<th>Data zwrotu</th>
+						<th>Koszt wypożyczenia</th>
+						<th>Status wypożyczenia</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="rental : ${rentals}">
+						<td th:text="${rental.id}">ID</td>
+						<td th:text="${rental.boardGame.title}">Tytuł gry</td>
+						<td
+							th:text="${#calendars.format(rental.creationDate, 'dd MMM yyyy')}">Data
+							utworzenia</td>
+						<td
+							th:text="${#calendars.format(rental.rentUntilDate, 'dd MMM yyyy')}">Data
+							zwrotu</td>
+
+						<td><span th:text="${rental.price}">Koszt</span> zł</td>
+						<td th:text="${rental.status.polishTranslation}">Status</td>
+						<td><a th:if="${@rentalService.canBeExtended(rental) and rental.status == T(bgshoprental.entity.RentalStatus).RECEIVED and rental.price.doubleValue() != 0} " href="#" th:href="@{/wypozyczenia/{wypozyczenie}/przedluz(wypozyczenie=${rental.id})}" class="btn btn-default btn-xs"
+							aria-label="Przedłuż wypożyczenie"> <span
+								class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+						</a><a th:if="${rental.status == T(bgshoprental.entity.RentalStatus).RECEIVED and rental.boardGame.sellQuantity > 0 and rental.price.doubleValue() != 0}" href="#" th:href="@{/wypozyczenia/{wypozyczenie}/kup(wypozyczenie=${rental.id})}" class="btn btn-default btn-xs"
+							aria-label="Zakup gry"> <span
+								class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+						</a></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div th:if="${not #lists.isEmpty(orders)}">
+
+				<h2>Twoje zamówienia</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Data złożenia</th>
+						<th>Status zamówienia</th>
+						<th>Akcje</th>
+					</tr>
+					<tr th:each="order : ${orders}">
+						<td th:text="${order.id}">ID</td>
+						<td
+							th:text="${#calendars.format(order.creationDate, 'dd MMM yyyy')}">Data
+							utworzenia</td>
+						<td th:text="${order.status.polishTranslation}">Status</td>
+						<td><a href="#"
+							th:href="@{/zamowienia/{zamowienie}(zamowienie=${order.id})}"
+							class="btn btn-default btn-xs" aria-label="Szczegóły zamówienia">
+								<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						</a></td>
+					</tr>
+				</table>
+
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
